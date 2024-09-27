@@ -168,3 +168,7 @@ window.addEventListener("mousemove", function (event) {
   }
 
 });
+
+// document.getElementById('apply-for-internship').addEventListener('click', function(){
+//   window.location.href = "apply_internships.html"
+// })
