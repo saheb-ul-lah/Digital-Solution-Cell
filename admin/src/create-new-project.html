@@ -180,9 +180,11 @@
         </button>
       </div>
     </nav>
+    <!-- End of Navigation bar -->
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_sidebar.html -->
+      <!-- Start of sidebar -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item nav-profile">
@@ -452,6 +454,7 @@
           </li>
         </ul>
       </nav>
+      <!-- End of Sidebar -->
 
       <!-- partial -->
       <div class="main-panel">
@@ -459,403 +462,72 @@
           <div class="page-header">
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white me-2">
-                <i class="mdi mdi-home"></i>
-              </span> Dashboard
+                <i class="mdi mdi-clipboard-plus"></i>
+              </span> Create New Project
             </h3>
             <nav aria-label="breadcrumb">
               <ul class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
-                  <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-                </li>
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create New Project</li>
               </ul>
             </nav>
           </div>
-          <div class="row">
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-danger card-img-holder text-white">
-                <div class="card-body">
-                  <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                  <h4 class="font-weight-normal mb-3">Total internship applicants <i
-                      class="mdi mdi-chart-line mdi-24px float-end"></i>
-                  </h4>
-                  <h2 class="mb-5">254</h2>
-                  <h6 class="card-text">Current year data</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-info card-img-holder text-white">
-                <div class="card-body">
-                  <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                  <h4 class="font-weight-normal mb-3">Total clients applications <i
-                      class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
-                  </h4>
-                  <h2 class="mb-5">471</h2>
-                  <h6 class="card-text">Current year data</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-success card-img-holder text-white">
-                <div class="card-body">
-                  <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                  <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-end"></i>
-                  </h4>
-                  <h2 class="mb-5">95,5741</h2>
-                  <h6 class="card-text">Current year impressions</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="row">
-              <div class="col-md-7 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="clearfix">
-                      <h4 class="card-title float-start">Visit And Sales Statistics</h4>
-                      <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
-                    </div>
-                    <canvas id="visit-sale-chart" class="mt-4"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Traffic Sources</h4>
-                    <div class="doughnutjs-wrapper d-flex justify-content-center">
-                      <canvas id="traffic-chart"></canvas>
-                    </div>
-                    <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+
+          <!-- Form to create a new project -->
           <div class="row">
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Completed Projects</h4>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th> Project Title </th>
-                          <th> Project assigned to </th>
-                          <th> Status </th>
-                          <th> Completion Date </th>
-                          <th> Project link </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td> Digital Library System </td>
-                          <td> Dr. Smith Johnson </td>
-                          <td>
-                            <label class="badge badge-gradient-success">COMPLETED</label>
-                          </td>
-                          <td> Jan 15, 2023 </td>
-                          <td><a target="_blank"
-                              href="https://mathematical-forum.org">https://mathematical-forum.org</a></td>
-                        </tr>
-                        <tr>
-                          <td> University Website Redesign </td>
-                          <td> Emma Watson </td>
-                          <td>
-                            <label class="badge badge-gradient-success">COMPLETED</label>
-                          </td>
-                          <td> Feb 27, 2023 </td>
-                          <td><a target="_blank"
-                              href="https://mathematical-forum.org">https://mathematical-forum.org</a></td>
-                        </tr>
-                        <tr>
-                          <td> Student Portal Development </td>
-                          <td> Michael Clark </td>
-                          <td>
-                            <label class="badge badge-gradient-success">COMPLETED</label>
-                          </td>
-                          <td> Mar 10, 2023 </td>
-                          <td><a target="_blank"
-                              href="https://mathematical-forum.org">https://mathematical-forum.org</a></td>
-                        </tr>
-                        <tr>
-                          <td> Online Internship Portal </td>
-                          <td> Sarah Miller </td>
-                          <td>
-                            <label class="badge badge-gradient-success">COMPLETED</label>
-                          </td>
-                          <td> Apr 5, 2023 </td>
-                          <td><a target="_blank"
-                              href="https://mathematical-forum.org">https://mathematical-forum.org</a></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <h4 class="card-title">Project Details</h4>
+                  <form class="forms-sample">
+                    <div class="form-group">
+                      <label for="projectTitle">Project Title</label>
+                      <input type="text" class="form-control" id="projectTitle" placeholder="Enter project title">
+                    </div>
 
-          <div class="row">
-            <div class="col-lg-5 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body p-0 d-flex">
-                  <div id="inline-datepicker" class="datepicker datepicker-custom"></div>
-                </div>
-              </div>
-            </div>
-            <!-- Todo list -->
-            <!-- <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title text-dark">Todo List</h4>
-                    <div class="add-items d-flex">
-                      <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
-                      <button class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn" id="add-task">Add</button>
+                    <div class="form-group">
+                      <label for="projectManager">Project Assigned To</label>
+                      <input type="text" class="form-control" id="projectManager"
+                        placeholder="Assign to (e.g., John Doe)">
                     </div>
-                    <div class="list-wrapper">
-                      <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Meeting with Alisa </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked> Call John </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Create invoice </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Print Statements </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked> Prepare for presentation </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Pick up kids from school </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-            <!-- Todo list -->
-            <div style="width: 600px;" class="col-md-5 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title text-dark">Todo List</h4>
-                  <div class="add-items d-flex">
-                    <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
-                    <button class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn"
-                      id="add-task">Add</button>
-                  </div>
-                  <div class="list-wrapper">
-                    <ul class="d-flex flex-column-reverse todo-list todo-list-custom" id="todo-list">
-                      <!-- Tasks will be dynamically added here -->
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <!-- <div class="col-md-7 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Project Status</h4>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th> # </th>
-                            <th> Name </th>
-                            <th> Due Date </th>
-                            <th> Progress </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td> 1 </td>
-                            <td> Herman Beck </td>
-                            <td> May 15, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 2 </td>
-                            <td> Messsy Adam </td>
-                            <td> Jul 01, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 3 </td>
-                            <td> John Richards </td>
-                            <td> Apr 12, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 4 </td>
-                            <td> Peter Meggik </td>
-                            <td> May 15, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 5 </td>
-                            <td> Edward </td>
-                            <td> May 03, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 5 </td>
-                            <td> Ronald </td>
-                            <td> Jun 05, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
 
+                    <div class="form-group">
+                      <label for="projectStatus">Project Status</label>
+                      <select class="form-control" id="projectStatus">
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>On Hold</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="completionDate">Expected Completion Date</label>
+                      <input type="date" class="form-control" id="completionDate">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="projectLink">Project Link</label>
+                      <input type="url" class="form-control" id="projectLink"
+                        placeholder="Enter project link (optional)">
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                    <button class="btn btn-light" type="reset">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
+          <!-- main-panel ends -->
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <!-- <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span> -->
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
-                class="mdi mdi-heart "> by - First interns of Digital Solution Cell</i></span>
-          </div>
-        </footer>
-        <!-- partial -->
+        <!-- page-body-wrapper ends -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
 
 
-
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const todoList = document.getElementById('todo-list');
-      const todoInput = document.querySelector('.todo-list-input');
-      const addButton = document.getElementById('add-task');
 
-      // Load tasks from localStorage
-      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
-      // Function to save tasks to localStorage
-      function saveTasks() {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-      }
-
-      // Function to render tasks
-      function renderTasks() {
-        todoList.innerHTML = '';
-        tasks.forEach((task, index) => {
-          const li = document.createElement('li');
-          li.className = task.completed ? 'completed' : '';
-          li.innerHTML = `
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="checkbox" type="checkbox" ${task.completed ? 'checked' : ''}>
-                            ${task.text}
-                            <i class="input-helper"></i>
-                        </label>
-                    </div>
-                    <i class="remove mdi mdi-close-circle-outline"></i>
-                `;
-
-          // Add event listener for checkbox
-          const checkbox = li.querySelector('.checkbox');
-          checkbox.addEventListener('change', () => {
-            tasks[index].completed = checkbox.checked;
-            saveTasks();
-            renderTasks();
-          });
-
-          // Add event listener for remove button
-          const removeBtn = li.querySelector('.remove');
-          removeBtn.addEventListener('click', () => {
-            tasks.splice(index, 1);
-            saveTasks();
-            renderTasks();
-          });
-
-          todoList.appendChild(li);
-        });
-      }
-
-      // Add new task
-      addButton.addEventListener('click', () => {
-        const taskText = todoInput.value.trim();
-        if (taskText) {
-          tasks.push({ text: taskText, completed: false });
-          saveTasks();
-          renderTasks();
-          todoInput.value = '';
-        }
-      });
-
-      // Allow adding task with Enter key
-      todoInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          addButton.click();
-        }
-      });
-
-      // Initial render
-      renderTasks();
-    });
   </script>
 
 

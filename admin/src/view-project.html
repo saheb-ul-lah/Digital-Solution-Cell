@@ -180,9 +180,11 @@
         </button>
       </div>
     </nav>
+    <!-- End of Navigation bar -->
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_sidebar.html -->
+      <!-- Start of sidebar -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item nav-profile">
@@ -452,6 +454,11 @@
           </li>
         </ul>
       </nav>
+      <!-- End of Sidebar -->
+
+
+
+
 
       <!-- partial -->
       <div class="main-panel">
@@ -459,135 +466,87 @@
           <div class="page-header">
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white me-2">
-                <i class="mdi mdi-home"></i>
-              </span> Dashboard
+                <i class="mdi mdi-view-list"></i>
+              </span> View & Manage Projects
             </h3>
             <nav aria-label="breadcrumb">
               <ul class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
-                  <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-                </li>
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">View Projects</li>
               </ul>
             </nav>
           </div>
-          <div class="row">
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-danger card-img-holder text-white">
-                <div class="card-body">
-                  <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                  <h4 class="font-weight-normal mb-3">Total internship applicants <i
-                      class="mdi mdi-chart-line mdi-24px float-end"></i>
-                  </h4>
-                  <h2 class="mb-5">254</h2>
-                  <h6 class="card-text">Current year data</h6>
-                </div>
-              </div>
+
+          <!-- Filters, Search, and Sort options -->
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <input type="text" class="form-control" id="searchProject"
+                placeholder="Search by project title or manager">
             </div>
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-info card-img-holder text-white">
-                <div class="card-body">
-                  <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                  <h4 class="font-weight-normal mb-3">Total clients applications <i
-                      class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
-                  </h4>
-                  <h2 class="mb-5">471</h2>
-                  <h6 class="card-text">Current year data</h6>
-                </div>
-              </div>
+
+            <div class="col-md-3">
+              <select class="form-control" id="filterStatus">
+                <option value="">Filter by Status</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="On Hold">On Hold</option>
+              </select>
             </div>
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-success card-img-holder text-white">
-                <div class="card-body">
-                  <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                  <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-end"></i>
-                  </h4>
-                  <h2 class="mb-5">95,5741</h2>
-                  <h6 class="card-text">Current year impressions</h6>
-                </div>
-              </div>
+
+            <div class="col-md-3">
+              <input type="date" class="form-control" id="filterDate" placeholder="Filter by Completion Date">
+            </div>
+
+            <div class="col-md-3">
+              <select class="form-control" id="sortProjects">
+                <option value="titleAsc">Sort by Title (A-Z)</option>
+                <option value="titleDesc">Sort by Title (Z-A)</option>
+                <option value="dateAsc">Sort by Date (Oldest First)</option>
+                <option value="dateDesc">Sort by Date (Newest First)</option>
+              </select>
             </div>
           </div>
-          <!-- <div class="row">
-              <div class="col-md-7 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="clearfix">
-                      <h4 class="card-title float-start">Visit And Sales Statistics</h4>
-                      <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
-                    </div>
-                    <canvas id="visit-sale-chart" class="mt-4"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Traffic Sources</h4>
-                    <div class="doughnutjs-wrapper d-flex justify-content-center">
-                      <canvas id="traffic-chart"></canvas>
-                    </div>
-                    <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+
+          <!-- Create new project -->
+          <!-- Create New Project Button -->
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <a href="create-new-project.html" class="btn btn-gradient-primary">Create New Project</a>
+            </div>
+          </div>
+          <!-- Projects Table -->
           <div class="row">
-            <div class="col-12 grid-margin">
+            <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Completed Projects</h4>
+                  <h4 class="card-title">Projects</h4>
+
                   <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-hover">
                       <thead>
                         <tr>
                           <th> Project Title </th>
-                          <th> Project assigned to </th>
+                          <th> Assigned To </th>
                           <th> Status </th>
                           <th> Completion Date </th>
-                          <th> Project link </th>
+                          <th> Actions </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="projectTable">
+                        <!-- Example Row -->
                         <tr>
-                          <td> Digital Library System </td>
-                          <td> Dr. Smith Johnson </td>
+                          <td> Website Redesign </td>
+                          <td> John Doe </td>
                           <td>
-                            <label class="badge badge-gradient-success">COMPLETED</label>
+                            <label class="badge badge-gradient-warning">In Progress</label>
                           </td>
-                          <td> Jan 15, 2023 </td>
-                          <td><a target="_blank"
-                              href="https://mathematical-forum.org">https://mathematical-forum.org</a></td>
-                        </tr>
-                        <tr>
-                          <td> University Website Redesign </td>
-                          <td> Emma Watson </td>
+                          <td> 2024-12-30 </td>
                           <td>
-                            <label class="badge badge-gradient-success">COMPLETED</label>
+                            <button class="btn btn-sm btn-gradient-primary edit-btn" data-id="1">Edit</button>
+                            <button class="btn btn-sm btn-gradient-danger delete-btn" data-id="1">Delete</button>
                           </td>
-                          <td> Feb 27, 2023 </td>
-                          <td><a target="_blank"
-                              href="https://mathematical-forum.org">https://mathematical-forum.org</a></td>
                         </tr>
-                        <tr>
-                          <td> Student Portal Development </td>
-                          <td> Michael Clark </td>
-                          <td>
-                            <label class="badge badge-gradient-success">COMPLETED</label>
-                          </td>
-                          <td> Mar 10, 2023 </td>
-                          <td><a target="_blank"
-                              href="https://mathematical-forum.org">https://mathematical-forum.org</a></td>
-                        </tr>
-                        <tr>
-                          <td> Online Internship Portal </td>
-                          <td> Sarah Miller </td>
-                          <td>
-                            <label class="badge badge-gradient-success">COMPLETED</label>
-                          </td>
-                          <td> Apr 5, 2023 </td>
-                          <td><a target="_blank"
-                              href="https://mathematical-forum.org">https://mathematical-forum.org</a></td>
-                        </tr>
+                        <!-- Additional rows can be added dynamically via JS -->
                       </tbody>
                     </table>
                   </div>
@@ -596,266 +555,73 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-lg-5 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body p-0 d-flex">
-                  <div id="inline-datepicker" class="datepicker datepicker-custom"></div>
+          <!-- Delete Confirmation Modal -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">Delete Project</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-              </div>
-            </div>
-            <!-- Todo list -->
-            <!-- <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title text-dark">Todo List</h4>
-                    <div class="add-items d-flex">
-                      <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
-                      <button class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn" id="add-task">Add</button>
-                    </div>
-                    <div class="list-wrapper">
-                      <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Meeting with Alisa </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked> Call John </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Create invoice </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Print Statements </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked> Prepare for presentation </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                        <li>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> Pick up kids from school </label>
-                          </div>
-                          <i class="remove mdi mdi-close-circle-outline"></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                <div class="modal-body">
+                  Are you sure you want to delete this project?
                 </div>
-              </div> -->
-            <!-- Todo list -->
-            <div style="width: 600px;" class="col-md-5 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title text-dark">Todo List</h4>
-                  <div class="add-items d-flex">
-                    <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
-                    <button class="add btn btn-gradient-primary font-weight-bold todo-list-add-btn"
-                      id="add-task">Add</button>
-                  </div>
-                  <div class="list-wrapper">
-                    <ul class="d-flex flex-column-reverse todo-list todo-list-custom" id="todo-list">
-                      <!-- Tasks will be dynamically added here -->
-                    </ul>
-                  </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-danger" id="confirmDelete">Yes, Delete</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <!-- <div class="col-md-7 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Project Status</h4>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th> # </th>
-                            <th> Name </th>
-                            <th> Due Date </th>
-                            <th> Progress </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td> 1 </td>
-                            <td> Herman Beck </td>
-                            <td> May 15, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 2 </td>
-                            <td> Messsy Adam </td>
-                            <td> Jul 01, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 3 </td>
-                            <td> John Richards </td>
-                            <td> Apr 12, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 4 </td>
-                            <td> Peter Meggik </td>
-                            <td> May 15, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 5 </td>
-                            <td> Edward </td>
-                            <td> May 03, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> 5 </td>
-                            <td> Ronald </td>
-                            <td> Jun 05, 2015 </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
 
-          </div>
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <!-- <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span> -->
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
-                class="mdi mdi-heart "> by - First interns of Digital Solution Cell</i></span>
-          </div>
-        </footer>
-        <!-- partial -->
       </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
 
 
 
+
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const todoList = document.getElementById('todo-list');
-      const todoInput = document.querySelector('.todo-list-input');
-      const addButton = document.getElementById('add-task');
-
-      // Load tasks from localStorage
-      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
-      // Function to save tasks to localStorage
-      function saveTasks() {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-      }
-
-      // Function to render tasks
-      function renderTasks() {
-        todoList.innerHTML = '';
-        tasks.forEach((task, index) => {
-          const li = document.createElement('li');
-          li.className = task.completed ? 'completed' : '';
-          li.innerHTML = `
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="checkbox" type="checkbox" ${task.completed ? 'checked' : ''}>
-                            ${task.text}
-                            <i class="input-helper"></i>
-                        </label>
-                    </div>
-                    <i class="remove mdi mdi-close-circle-outline"></i>
-                `;
-
-          // Add event listener for checkbox
-          const checkbox = li.querySelector('.checkbox');
-          checkbox.addEventListener('change', () => {
-            tasks[index].completed = checkbox.checked;
-            saveTasks();
-            renderTasks();
-          });
-
-          // Add event listener for remove button
-          const removeBtn = li.querySelector('.remove');
-          removeBtn.addEventListener('click', () => {
-            tasks.splice(index, 1);
-            saveTasks();
-            renderTasks();
-          });
-
-          todoList.appendChild(li);
+    // Event listeners for Edit and Delete buttons
+    document.addEventListener("DOMContentLoaded", function () {
+      // Edit button functionality
+      document.querySelectorAll(".edit-btn").forEach(function (button) {
+        button.addEventListener("click", function () {
+          const projectId = this.getAttribute("data-id");
+          // Redirect to the edit page with the project ID (you can pass the project ID in the URL if needed)
+          window.location.href = `./edit-project.html?projectId=${projectId}`;
         });
-      }
-
-      // Add new task
-      addButton.addEventListener('click', () => {
-        const taskText = todoInput.value.trim();
-        if (taskText) {
-          tasks.push({ text: taskText, completed: false });
-          saveTasks();
-          renderTasks();
-          todoInput.value = '';
-        }
       });
 
-      // Allow adding task with Enter key
-      todoInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          addButton.click();
-        }
+      // Delete button functionality
+      let deleteProjectId = null;
+
+      document.querySelectorAll(".delete-btn").forEach(function (button) {
+        button.addEventListener("click", function () {
+          deleteProjectId = this.getAttribute("data-id");
+          // Show the delete confirmation modal
+          const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+          deleteModal.show();
+        });
       });
 
-      // Initial render
-      renderTasks();
+      // Confirm delete action
+      document.getElementById("confirmDelete").addEventListener("click", function () {
+        if (deleteProjectId) {
+          // Perform the delete action (e.g., call an API to delete the project)
+          console.log(`Deleting project with ID: ${deleteProjectId}`);
+
+          // Close the modal
+          const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+          deleteModal.hide();
+
+          // Optionally, remove the deleted project row from the table (or refresh the page)
+          document.querySelector(`button.delete-btn[data-id="${deleteProjectId}"]`).closest("tr").remove();
+        }
+      });
     });
+
   </script>
 
 

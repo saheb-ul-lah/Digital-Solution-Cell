@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin-Digital Solution Cell</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="assets/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.min.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- End layout styles -->
+  <link rel="shortcut icon"
+    href="data:image/jpeg;base64,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" />
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+    }
+
+    .main-panel {
+      margin: 20px;
+    }
+
+    .page-header {
+      margin-bottom: 20px;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .table th {
+      background-color: #f8f9fa;
+    }
+
+    .badge {
+      padding: 0.5em 1em;
+      border-radius: 0.5rem;
+    }
+
+    .badge-success {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .badge-warning {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    .badge-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-gradient-warning {
+      background: linear-gradient(90deg, #ff9800, #ff5722);
+      color: white;
+    }
+
+    /* Input Group Styles */
+    .input-group {
+      width: 100%;
+    }
+
+    /* Search bar styles */
+    #searchApplication {
+      border-radius: 0.25rem 0 0 0.25rem;
+      border-right: none;
+    }
+
+    /* Button styles */
+    #searchBtn {
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      margin-left: 15px;
+      /* Add space between search and filter */
+    }
+
+    /* Table styles */
+    .table-responsive {
+      margin-top: 20px;
+    }
+
+    /* Pagination styles */
+    .pagination {
+      justify-content: center;
+      /* Center the pagination */
+      margin-top: 20px;
+    }
+
+    .pagination .page-item .page-link {
+      color: #6c757d;
+      border: 1px solid #dee2e6;
+      margin: 0 3px;
+    }
+
+    .pagination .page-item.active .page-link {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
+
+    .pagination .page-item .page-link:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container-scroller">
+    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+        <a class="navbar-brand brand-logo" href="index.html"><img style="height:50px;"
+            src="./16 9-logo-trabsparent-Digital_SOLUTIONS-.png" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="./Favicon-Digital_SOLUTIONS-icon.png"
+            alt="logo" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="mdi mdi-menu"></span>
+        </button>
+        <div class="search-field d-none d-md-block">
+          <form class="d-flex align-items-center h-100" action="#">
+            <div class="input-group">
+              <div class="input-group-prepend bg-transparent">
+                <i class="input-group-text border-0 mdi mdi-magnify"></i>
+              </div>
+              <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+            </div>
+          </form>
+        </div>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <div class="nav-profile-img">
+                <img
+                  src="https://media.licdn.com/dms/image/D5603AQFuSvqLdjJBJQ/profile-displayphoto-shrink_200_200/0/1704735099323?e=2147483647&v=beta&t=HGaY_PhJO3F-b7xAQ_C6GrHGkCDJi0Pcx2-GMXujutk"
+                  alt="image">
+                <span class="availability-status online"></span>
+              </div>
+              <div class="nav-profile-text">
+                <p class="mb-1 text-black"><strong>Saheb Mansuri</strong></p>
+              </div>
+            </a>
+            <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+              <!-- <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a> -->
+              <!-- <div class="dropdown-divider"></div> -->
+              <a class="dropdown-item" href="#">
+                <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+            </div>
+          </li>
+          <li class="nav-item d-none d-lg-block full-screen-link">
+            <a class="nav-link">
+              <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+            </a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+              <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="mdi mdi-email-outline"></i>
+                <span class="count-symbol bg-warning"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                <h6 class="p-3 mb-0">Messages</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <img src="assets/images/faces/face4.jpg" alt="image" class="profile-pic">
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
+                    <p class="text-gray mb-0"> 1 Minutes ago </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <img src="assets/images/faces/face2.jpg" alt="image" class="profile-pic">
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
+                    <p class="text-gray mb-0"> 15 Minutes ago </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <img src="assets/images/faces/face3.jpg" alt="image" class="profile-pic">
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
+                    <p class="text-gray mb-0"> 18 Minutes ago </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <h6 class="p-3 mb-0 text-center">4 new messages</h6>
+              </div>
+            </li> -->
+          <!-- <li class="nav-item dropdown">
+              <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                <i class="mdi mdi-bell-outline"></i>
+                <span class="count-symbol bg-danger"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                <h6 class="p-3 mb-0">Notifications</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-success">
+                      <i class="mdi mdi-calendar"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
+                    <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-warning">
+                      <i class="mdi mdi-cog"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
+                    <p class="text-gray ellipsis mb-0"> Update dashboard </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-info">
+                      <i class="mdi mdi-link-variant"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
+                    <p class="text-gray ellipsis mb-0"> New admin wow! </p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <h6 class="p-3 mb-0 text-center">See all notifications</h6>
+              </div>
+            </li> -->
+          <!-- <li class="nav-item nav-logout d-none d-lg-block">
+              <a class="nav-link" href="#">
+                <i class="mdi mdi-power"></i>
+              </a>
+            </li> -->
+          <!-- <li class="nav-item nav-settings d-none d-lg-block">
+              <a class="nav-link" href="#">
+                <i class="mdi mdi-format-line-spacing"></i>
+              </a>
+            </li> -->
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- End of Navigation bar -->
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <!-- Start of sidebar -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item nav-profile">
+            <a href="admin-profile.html" class="nav-link">
+              <div class="nav-profile-image">
+                <img
+                  src="https://media.licdn.com/dms/image/D5603AQFuSvqLdjJBJQ/profile-displayphoto-shrink_200_200/0/1704735099323?e=2147483647&v=beta&t=HGaY_PhJO3F-b7xAQ_C6GrHGkCDJi0Pcx2-GMXujutk"
+                  alt="profile" />
+                <span class="login-status online"></span>
+                <!--change to offline or busy as needed-->
+              </div>
+              <div class="nav-profile-text d-flex flex-column">
+                <span class="font-weight-bold mb-2">Saheb Mansuri</span>
+                <span class="text-secondary text-small">Intern</span>
+              </div>
+              <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <span class="menu-title">Dashboard</span>
+              <i class="mdi mdi-home menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+              aria-controls="ui-basic">
+              <span class="menu-title">Projects</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="./create-new-project.html">Create new project</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./view-project.html">View project</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="registered-clients.html">
+              <span class="menu-title">Registered Clients</span>
+              <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="registered-interns.html">
+              <span class="menu-title">Registered Interns</span>
+              <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="registered-members.html">
+              <span class="menu-title">Registered Members</span>
+              <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <span class="menu-title">Applications</span>
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="client-applications-list.html">Client applications</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="intern-applications-list.html">Internship applications</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="member-applications-list.html">Member applications</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <span class="menu-title">Icons</span>
+              <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/icons/font-awesome.html">Font Awesome</a>
+                </li>
+              </ul>
+            </div>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#forms" aria-expanded="false" aria-controls="forms">
+              <span class="menu-title">Forms</span>
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+            </a>
+            <div class="collapse" id="forms">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/forms/basic_elements.html">Form Elements</a>
+                </li>
+              </ul>
+            </div>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <span class="menu-title">Charts</span>
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a>
+                </li>
+              </ul>
+            </div>
+          </li> -->
+
+          <!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <span class="menu-title">User Pages</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi-lock menu-icon"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/samples/login.html"> Login </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/samples/register.html"> Register </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/samples/error-404.html"> 404 </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pages/samples/error-500.html"> 500 </a>
+                </li>
+              </ul>
+            </div>
+          </li> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Basic UI Elements</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+                  </li>
+                </ul>
+              </div>
+            </li> -->
+          <!-- <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+                <span class="menu-title">Icons</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+              </a>
+              <div class="collapse" id="icons">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/icons/font-awesome.html">Font Awesome</a>
+                  </li>
+                </ul>
+              </div>
+            </li> -->
+          <!-- <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#forms" aria-expanded="false" aria-controls="forms">
+                <span class="menu-title">Forms</span>
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              </a>
+              <div class="collapse" id="forms">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/forms/basic_elements.html">Form Elements</a>
+                  </li>
+                </ul>
+              </div>
+            </li> -->
+          <!-- <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+                <span class="menu-title">Charts</span>
+                <i class="mdi mdi-chart-bar menu-icon"></i>
+              </a>
+              <div class="collapse" id="charts">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a>
+                  </li>
+                </ul>
+              </div>
+            </li> -->
+          <!-- <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+                <span class="menu-title">Tables</span>
+                <i class="mdi mdi-table-large menu-icon"></i>
+              </a>
+              <div class="collapse" id="tables">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a>
+                  </li>
+                </ul>
+              </div>
+            </li> -->
+          <!-- <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                <span class="menu-title">User Pages</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-lock menu-icon"></i>
+              </a>
+              <div class="collapse" id="auth">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/samples/login.html"> Login </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/samples/register.html"> Register </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/samples/error-404.html"> 404 </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/samples/error-500.html"> 500 </a>
+                  </li>
+                </ul>
+              </div>
+            </li> -->
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="docs/documentation.html" target="_blank">
+              <span class="menu-title">Documentation</span>
+              <i class="mdi mdi-file-document-box menu-icon"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- End of Sidebar -->
+
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-warning text-white me-2">
+                <i class="mdi mdi-file-document"></i>
+              </span> Member Applications
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Member Applications</li>
+              </ul>
+            </nav>
+          </div>
+
+          <!-- Applications List Section -->
+          <div class="row">
+            <!-- Filter and Search Bar -->
+            <div class="col-12 mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search by member or project..."
+                    id="searchApplication">
+                  <button class="btn btn-gradient-warning" type="button" id="searchBtn"><i
+                      class="mdi mdi-magnify"></i></button>
+                </div>
+                <div class="dropdown">
+                  <button class="btn btn-gradient-warning dropdown-toggle" id="filterBtn" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Filter <i class="mdi mdi-filter"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="filterBtn">
+                    <a class="dropdown-item" href="#" id="filterInProgress">In Progress</a>
+                    <a class="dropdown-item" href="#" id="filterCompleted">Completed</a>
+                    <a class="dropdown-item" href="#" id="filterPending">Pending Review</a>
+                    <a class="dropdown-item" href="#" id="filterAll">All Applications</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Applications Table -->
+            <div class="col-lg-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Member Applications</h4>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Application ID</th>
+                          <th>Member Name</th>
+                          <th>Project</th>
+                          <th>Submission Date</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="applicationsList">
+                        <!-- Dynamic Rows will be inserted here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagination Section -->
+            <nav aria-label="Page navigation">
+              <ul class="pagination" id="pagination">
+                <!-- Pagination items will be inserted here -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Mock Data for Member Applications
+      const applications = [
+        { id: '201', member: 'John Doe', project: 'Website Redesign', submissionDate: '2024-08-01', status: 'In Progress' },
+        { id: '202', member: 'Jane Smith', project: 'Mobile App Development', submissionDate: '2024-08-05', status: 'Completed' },
+        { id: '203', member: 'Charlie Brown', project: 'Cloud Migration', submissionDate: '2024-08-10', status: 'Pending Review' },
+        { id: '204', member: 'Diana Prince', project: 'E-commerce Platform', submissionDate: '2024-08-15', status: 'In Progress' },
+        { id: '205', member: 'Bruce Wayne', project: 'SEO Optimization', submissionDate: '2024-08-20', status: 'Completed' },
+        { id: '206', member: 'Clark Kent', project: 'Marketing Strategy', submissionDate: '2024-08-25', status: 'In Progress' },
+        { id: '207', member: 'Natasha Romanoff', project: 'Data Analysis', submissionDate: '2024-08-30', status: 'Pending Review' },
+        { id: '208', member: 'Peter Parker', project: 'UX/UI Design', submissionDate: '2024-09-05', status: 'In Progress' },
+        { id: '209', member: 'Tony Stark', project: 'App Development', submissionDate: '2024-09-10', status: 'Completed' },
+        { id: '210', member: 'Steve Rogers', project: 'Cyber Security', submissionDate: '2024-09-15', status: 'In Progress' },
+      ];
+
+      const applicationsList = document.getElementById('applicationsList');
+      const pagination = document.getElementById('pagination');
+      const searchInput = document.getElementById('searchApplication');
+      const filterBtn = document.getElementById('filterBtn');
+      const filterDropdown = document.getElementById('filterBtn').nextElementSibling;
+
+      // Initialize state
+      let currentPage = 1;
+      const pageSize = 5;
+      let currentFilter = 'All Applications';
+
+      // Function to render applications list
+      function renderApplications(page = 1, searchQuery = '', filterQuery = currentFilter) {
+        const filteredApplications = applications.filter(app =>
+          (app.member.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            app.project.toLowerCase().includes(searchQuery.toLowerCase())) &&
+          (filterQuery === 'All Applications' || app.status === filterQuery)
+        );
+
+        const paginatedApplications = filteredApplications.slice((page - 1) * pageSize, page * pageSize);
+
+        applicationsList.innerHTML = '';
+        paginatedApplications.forEach(application => {
+          const row = `
+            <tr>
+                <td>${application.id}</td>
+                <td>${application.member}</td>
+                <td>${application.project}</td>
+                <td>${application.submissionDate}</td>
+                <td><span class="badge badge-${getStatusClass(application.status)}">${application.status}</span></td>
+                <td>
+                    <button class="btn btn-sm btn-gradient-warning" onclick="viewApplication('${application.id}')">View</button>
+                    <button class="btn btn-sm btn-light" onclick="editApplication('${application.id}')">Edit</button>
+                </td>
+            </tr>
+            `;
+          applicationsList.insertAdjacentHTML('beforeend', row);
+        });
+
+        renderPagination(filteredApplications.length);
+      }
+
+      // Function to set status badge classes
+      function getStatusClass(status) {
+        switch (status) {
+          case 'In Progress': return 'warning';
+          case 'Completed': return 'success';
+          case 'Pending Review': return 'secondary';
+          default: return 'light';
+        }
+      }
+
+      // Function to render pagination
+      function renderPagination(totalCount) {
+        const totalPages = Math.ceil(totalCount / pageSize);
+        pagination.innerHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+          const pageItem = `
+            <li class="page-item ${i === currentPage ? 'active' : ''}">
+                <a class="page-link" href="#">${i}</a>
+            </li>
+            `;
+          pagination.insertAdjacentHTML('beforeend', pageItem);
+        }
+
+        // Add event listeners for pagination
+        document.querySelectorAll('.page-item').forEach((item, index) => {
+          item.addEventListener('click', function (e) {
+            e.preventDefault();
+            currentPage = index + 1; // Set the current page
+            renderApplications(currentPage, searchInput.value, currentFilter); // Re-render applications
+          });
+        });
+      }
+
+      // Live Search Functionality
+      searchInput.addEventListener('input', function () {
+        renderApplications(currentPage, searchInput.value, currentFilter); // Re-render applications on input
+      });
+
+      // Dropdown filter functionality
+      filterBtn.addEventListener('click', function () {
+        filterDropdown.classList.toggle('show');
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!event.target.closest('.dropdown')) {
+          filterDropdown.classList.remove('show');
+        }
+      });
+
+      document.getElementById('filterInProgress').addEventListener('click', function () {
+        currentFilter = 'In Progress';
+        renderApplications(currentPage, searchInput.value, currentFilter);
+      });
+
+      document.getElementById('filterCompleted').addEventListener('click', function () {
+        currentFilter = 'Completed';
+        renderApplications(currentPage, searchInput.value, currentFilter);
+      });
+
+      document.getElementById('filterPending').addEventListener('click', function () {
+        currentFilter = 'Pending Review';
+        renderApplications(currentPage, searchInput.value, currentFilter);
+      });
+
+      document.getElementById('filterAll').addEventListener('click', function () {
+        currentFilter = 'All Applications';
+        renderApplications(currentPage, searchInput.value, currentFilter);
+      });
+
+      // Functions for navigation
+      window.viewApplication = function (id) {
+        // Redirect to view page with application id as a query parameter
+        window.location.href = `view-member-application.html?applicationId=${id}`;
+      };
+
+      window.editApplication = function (id) {
+        // Redirect to edit page with application id as a query parameter
+        window.location.href = `edit-member-application.html?applicationId=${id}`;
+      };
+
+      // Initial render
+      renderApplications(currentPage);
+    });
+  </script>
+
+
+
+
+
+
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="assets/vendors/chart.js/chart.umd.js"></script>
+  <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="assets/js/off-canvas.js"></script>
+  <script src="assets/js/misc.js"></script>
+  <script src="assets/js/settings.js"></script>
+  <script src="assets/js/todolist.js"></script>
+  <script src="assets/js/jquery.cookie.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page -->
+  <script src="assets/js/dashboard.js"></script>
+  <!-- End custom js for this page -->
+</body>
+
+</html>
