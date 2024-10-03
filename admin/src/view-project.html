@@ -209,25 +209,13 @@
               <i class="mdi mdi-home menu-icon"></i>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-              aria-controls="ui-basic">
-              <span class="menu-title">Projects</span>
-              <i class="menu-arrow"></i>
-              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="./create-new-project.html">Create new project</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./view-project.html">View project</a>
-                </li>
-              </ul>
-            </div>
-          </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="view-project.html">
+              <span class="menu-title">View project</span>
+              <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="registered-clients.html">
               <span class="menu-title">Registered Clients</span>
@@ -250,6 +238,7 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <span class="menu-title">Applications</span>
+              <i class="menu-arrow"></i>
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
             <div class="collapse" id="tables">
@@ -479,41 +468,16 @@
 
           <!-- Filters, Search, and Sort options -->
           <div class="row mb-3">
-            <div class="col-md-3">
-              <input type="text" class="form-control" id="searchProject"
-                placeholder="Search by project title or manager">
-            </div>
-
-            <div class="col-md-3">
-              <select class="form-control" id="filterStatus">
-                <option value="">Filter by Status</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-                <option value="On Hold">On Hold</option>
-              </select>
-            </div>
-
-            <div class="col-md-3">
-              <input type="date" class="form-control" id="filterDate" placeholder="Filter by Completion Date">
-            </div>
-
-            <div class="col-md-3">
-              <select class="form-control" id="sortProjects">
-                <option value="titleAsc">Sort by Title (A-Z)</option>
-                <option value="titleDesc">Sort by Title (Z-A)</option>
-                <option value="dateAsc">Sort by Date (Oldest First)</option>
-                <option value="dateDesc">Sort by Date (Newest First)</option>
-              </select>
-            </div>
+            <!-- Add search and filter form controls -->
           </div>
 
-          <!-- Create new project -->
           <!-- Create New Project Button -->
           <div class="row mb-3">
             <div class="col-md-12">
               <a href="create-new-project.html" class="btn btn-gradient-primary">Create New Project</a>
             </div>
           </div>
+
           <!-- Projects Table -->
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
@@ -533,20 +497,7 @@
                         </tr>
                       </thead>
                       <tbody id="projectTable">
-                        <!-- Example Row -->
-                        <tr>
-                          <td> Website Redesign </td>
-                          <td> John Doe </td>
-                          <td>
-                            <label class="badge badge-gradient-warning">In Progress</label>
-                          </td>
-                          <td> 2024-12-30 </td>
-                          <td>
-                            <button class="btn btn-sm btn-gradient-primary edit-btn" data-id="1">Edit</button>
-                            <button class="btn btn-sm btn-gradient-danger delete-btn" data-id="1">Delete</button>
-                          </td>
-                        </tr>
-                        <!-- Additional rows can be added dynamically via JS -->
+                        <!-- Project rows will be dynamically added here -->
                       </tbody>
                     </table>
                   </div>
@@ -583,41 +534,103 @@
 
 
   <script>
-    // Event listeners for Edit and Delete buttons
     document.addEventListener("DOMContentLoaded", function () {
-      // Edit button functionality
-      document.querySelectorAll(".edit-btn").forEach(function (button) {
-        button.addEventListener("click", function () {
-          const projectId = this.getAttribute("data-id");
-          // Redirect to the edit page with the project ID (you can pass the project ID in the URL if needed)
+      // Function to fetch and display projects
+      function loadProjects() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "view_project.php", true);
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            const projects = JSON.parse(xhr.responseText);
+            const projectTable = document.getElementById("projectTable");
+
+            // Clear the table before adding new rows
+            projectTable.innerHTML = "";
+
+            // Loop through the projects and add rows dynamically
+            projects.forEach(function (project) {
+              let statusBadgeClass = '';
+              switch (project.project_status) {
+                case 'In Progress':
+                  statusBadgeClass = 'badge-gradient-warning';
+                  break;
+                case 'Completed':
+                  statusBadgeClass = 'badge-gradient-success';
+                  break;
+                case 'On Hold':
+                  statusBadgeClass = 'badge-gradient-danger';
+                  break;
+              }
+
+              const row = `
+                        <tr>
+                            <td>${project.project_title}</td>
+                            <td>${project.project_manager}</td>
+                            <td><label class="badge ${statusBadgeClass}">${project.project_status}</label></td>
+                            <td>${project.completion_date}</td>
+                            <td>
+                                <button class="btn btn-sm btn-gradient-primary edit-btn" data-id="${project.id}">Edit</button>
+                                <button class="btn btn-sm btn-gradient-danger delete-btn" data-id="${project.id}">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+
+              projectTable.innerHTML += row;
+            });
+          }
+        };
+        xhr.send();
+      }
+
+      // Load projects on page load
+      loadProjects();
+
+      // Event delegation for Edit button functionality
+      document.getElementById("projectTable").addEventListener("click", function (e) {
+        if (e.target && e.target.classList.contains("edit-btn")) {
+          const projectId = e.target.getAttribute("data-id");
           window.location.href = `./edit-project.html?projectId=${projectId}`;
-        });
+        }
       });
 
-      // Delete button functionality
-      let deleteProjectId = null;
+      // Event delegation for Delete button functionality
+      document.getElementById("projectTable").addEventListener("click", function (e) {
+        if (e.target && e.target.classList.contains("delete-btn")) {
+          const deleteProjectId = e.target.getAttribute("data-id");
 
-      document.querySelectorAll(".delete-btn").forEach(function (button) {
-        button.addEventListener("click", function () {
-          deleteProjectId = this.getAttribute("data-id");
           // Show the delete confirmation modal
           const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
           deleteModal.show();
-        });
-      });
 
-      // Confirm delete action
-      document.getElementById("confirmDelete").addEventListener("click", function () {
-        if (deleteProjectId) {
-          // Perform the delete action (e.g., call an API to delete the project)
-          console.log(`Deleting project with ID: ${deleteProjectId}`);
+          // Confirm delete action
+          document.getElementById("confirmDelete").addEventListener("click", function () {
+            if (deleteProjectId) {
+              // Perform the delete action via AJAX
+              const xhr = new XMLHttpRequest();
+              xhr.open("POST", "delete_project.php", true);
+              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+              xhr.onload = function () {
+                if (xhr.status === 200) {
+                  const response = JSON.parse(xhr.responseText);
+                  if (response.success) {
+                    console.log(`Deleted project with ID: ${deleteProjectId}`);
 
-          // Close the modal
-          const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
-          deleteModal.hide();
+                    // Remove the deleted project row from the table
+                    document.querySelector(`button.delete-btn[data-id="${deleteProjectId}"]`).closest("tr").remove();
 
-          // Optionally, remove the deleted project row from the table (or refresh the page)
-          document.querySelector(`button.delete-btn[data-id="${deleteProjectId}"]`).closest("tr").remove();
+                    // Close the modal
+                    const deleteModalInstance = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                    deleteModalInstance.hide();
+                  } else {
+                    console.error("Error deleting project: " + response.error);
+                  }
+                }
+              };
+
+              // Send the project ID to the server for deletion
+              xhr.send(`id=${deleteProjectId}`);
+            }
+          });
         }
       });
     });

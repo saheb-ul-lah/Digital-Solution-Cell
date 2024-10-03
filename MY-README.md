@@ -1,3 +1,21 @@
+Keyboard Shortcut (VS Code): 
+To create new files-> ctrl+alt+N  
+&
+To create new folders -> ctrl+alt+shift+N 
+
+To focus on the current file name 
+ctrl+shift+E
+then shift+tab will go to Creat new file/folder icon on the top
+
+
+#Current deplpment link for Digital-solution-cell
+Homepage -> 
+https://digital-solution-cell.vercel.app/index.html
+Admin Panel -> 
+https://digital-solution-cell.vercel.app/admin/src/index.html
+
+#Github Push Guide below :
+
 To push your new changes after making modifications to your project, you can follow these steps in Git:
 
 1. **Check the status of your repository** (optional but useful):

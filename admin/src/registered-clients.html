@@ -238,25 +238,13 @@
               <i class="mdi mdi-home menu-icon"></i>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-              aria-controls="ui-basic">
-              <span class="menu-title">Projects</span>
-              <i class="menu-arrow"></i>
-              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="./create-new-project.html">Create new project</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./view-project.html">View project</a>
-                </li>
-              </ul>
-            </div>
-          </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="view-project.html">
+              <span class="menu-title">View project</span>
+              <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="registered-clients.html">
               <span class="menu-title">Registered Clients</span>
@@ -279,6 +267,7 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <span class="menu-title">Applications</span>
+              <i class="menu-arrow"></i>
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
             <div class="collapse" id="tables">
@@ -551,35 +540,56 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Mock data for clients (replace with actual data from your backend)
-      const clients = [
-        { id: '1', name: 'Acme Corp', email: 'contact@acme.com', phone: '+1234567890' },
-        { id: '2', name: 'Beta Solutions', email: 'info@beta.com', phone: '+1234567891' },
-        { id: '3', name: 'Gamma Inc.', email: 'support@gamma.com', phone: '+1234567892' },
-      ];
+      fetchClients(); // Fetch clients when the DOM is loaded
+    });
 
-      // Render clients to the DOM
+    // Fetch clients from the database
+    function fetchClients() {
+      fetch('fetch_accepted_clients.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json(); // Parse JSON response
+        })
+        .then(data => {
+          // Check if the fetching was successful
+          if (data.success) {
+            renderClients(data.clients); // Render clients to the DOM
+          } else {
+            console.error('Error fetching clients:', data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+    // Render clients to the DOM
+    function renderClients(clients) {
       const clientsList = document.getElementById('clientsList');
+      clientsList.innerHTML = ''; // Clear existing clients
+
       clients.forEach(client => {
         const clientCard = document.createElement('div');
         clientCard.className = 'col-md-4 client-card';
         clientCard.innerHTML = `
-      <div class="card client-card-container" data-id="${client.id}">
-        <div class="card-body">
-          <h5 class="card-title">${client.name}</h5>
-          <p class="card-text">Email: ${client.email}</p>
-          <p class="card-text">Phone: ${client.phone}</p>
-          <div class="client-actions">
-            <button class="btn btn-gradient-primary btn-sm" onclick="viewClient('${client.id}')">View</button>
-            <button class="btn btn-gradient-warning btn-sm" onclick="editClient('${client.id}')">Edit</button>
-            <button class="btn btn-gradient-danger btn-sm" onclick="confirmDelete('${client.id}')">Delete</button>
-          </div>
-        </div>
-      </div>
-    `;
-        clientsList.appendChild(clientCard);
+            <div class="card client-card-container" data-id="${client.id}">
+                <div class="card-body">
+                    <h5 class="card-title">${client.name}</h5>
+                    <p class="card-text">Email: ${client.email}</p>
+                    <p class="card-text">Phone: ${client.phone}</p>
+                    <div class="client-actions">
+                        <button class="btn btn-gradient-primary btn-sm" onclick="viewClient('${client.id}')">View</button>
+                        <button class="btn btn-gradient-warning btn-sm" onclick="editClient('${client.id}')">Edit</button>
+                        <button class="btn btn-gradient-danger btn-sm" onclick="confirmDelete('${client.id}')">Delete</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        clientsList.appendChild(clientCard); // Add the client card to the list
       });
-    });
+    }
 
     // View client function
     function viewClient(id) {
@@ -606,17 +616,42 @@
       };
     }
 
-    // Delete client function (placeholder for backend call)
+    // Delete client function (fetches the PHP script)
     function deleteClient(id) {
-      console.log(`Client with ID ${id} has been deleted.`);
-      // Remove the client card from the DOM
-      const clientCard = document.querySelector(`.client-card-container[data-id='${id}']`);
-      if (clientCard) {
-        clientCard.remove();
-      }
+      // Make an AJAX request to delete the client from the database
+      fetch('fetch_accepted_clients.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: id }) // Send the client ID as JSON
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json(); // Assuming the server responds with JSON
+        })
+        .then(data => {
+          // Check if the deletion was successful
+          if (data.success) {
+            console.log(`Client with ID ${id} has been deleted.`);
+            // Remove the client card from the DOM
+            const clientCard = document.querySelector(`.client-card-container[data-id='${id}']`);
+            if (clientCard) {
+              clientCard.remove();
+            }
+          } else {
+            console.error('Error deleting client:', data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     }
 
   </script>
+
 
 
 

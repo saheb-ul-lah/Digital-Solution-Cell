@@ -11,32 +11,81 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css">
     <!-- Custom CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    
-    
-    
-    
+
+
+
+
+
     <!-- 
     - google font link
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap"
-    rel="stylesheet">
-    
+        rel="stylesheet">
+
     <!-- 
     - custom css link
     -->
     <link rel="stylesheet" href="./assets/css/style.css">
-    
-    
+
+
     <link rel="stylesheet" href="apply_internships.css">
-    
- </head>
-            
-            
+    <style>
+        #internshipForm input,
+        #internshipForm select,
+        #internshipForm textarea,
+        #internshipForm button {
+            font-size: 15px;
+        }
+
+        /* Toast Styling */
+        .toast {
+            visibility: hidden;
+            max-width: 600px;
+            margin: auto;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            padding: 20px;
+            position: fixed;
+            z-index: 99;
+            left: 50%;
+            bottom: 50%;
+            transform: translate(-50%, 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease, bottom 0.5s ease;
+        }
+
+        /* Show the toast */
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+            top: 30%;
+            font-size: 25px;
+            font-weight: 700;
+            border: 4px solid #333;
+        }
+
+        /* Success Toast */
+        .toast.success {
+            background-color: #4CAF50;
+            /* Green */
+        }
+
+        /* Error Toast */
+        .toast.error {
+            background-color: #f44336;
+            /* Red */
+        }
+    </style>
+
+</head>
+
+
 <body>
-    
+
     <!-- 
         - #PRELOADER
         -->
@@ -141,7 +190,7 @@
                     </li>
 
                     <li class="navbar-item">
-                        <a href="#about" class="navbar-link hover-underline">
+                        <a href="./index.html#about" class="navbar-link hover-underline">
                             <div class="separator"></div>
 
                             <span class="span">About Us</span>
@@ -157,7 +206,7 @@
                     </li>
 
                     <li class="navbar-item">
-                        <a href="#contact" class="navbar-link hover-underline">
+                        <a href="index.html#submit-proposal" class="navbar-link hover-underline">
                             <div class="separator"></div>
 
                             <span class="span">Contact</span>
@@ -189,7 +238,7 @@
 
             </nav>
 
-            <a href="#" class="btn btn-secondary">
+            <a href="index.html#submit-proposal" class="btn btn-secondary">
                 <span class="text text-1">Submit A Proposal</span>
 
                 <span class="text text-2" aria-hidden="true">Submit A Proposal</span>
@@ -206,9 +255,14 @@
         </div>
     </header>
     <main>
+        <div id="toast" class="toast"></div>
         <section id="main-container" class="h-100 h-custom gradient-custom-2">
             <div style="display: flex; align-items: center;justify-content: center;">
-                <h1 style="background-color: aliceblue; color: black; display: block; text-align: center; width: fit-content;padding: 5px 10px; border-radius: 10px; border-bottom: 5px solid lightblue;">
+                <!-- Toast Container -->
+                
+
+                <h1
+                    style="background-color: aliceblue; color: black; display: block; text-align: center; width: fit-content;padding: 5px 10px; border-radius: 10px; border-bottom: 5px solid lightblue;">
                     <strong>Application form for internship </strong>
                 </h1>
             </div>
@@ -223,7 +277,8 @@
                                         <!-- Left Side -->
                                         <div class="col-lg-6">
                                             <div class="p-5">
-                                                <h3 class="fw-normal mb-5" style="color: #4835d4;">Personal Information</h3>
+                                                <h3 class="fw-normal mb-5" style="color: #4835d4;">Personal Information
+                                                </h3>
 
                                                 <div class="mb-4 pb-2">
                                                     <select class="form-select form-select-lg mb-3 custom-select"
@@ -240,7 +295,8 @@
                                                         <div class="form-outline">
                                                             <input type="text" id="first_name" name="first_name"
                                                                 class="form-control form-control-lg" required />
-                                                            <label class="form-label" for="first_name">First Name</label>
+                                                            <label class="form-label" for="first_name">First
+                                                                Name</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 mb-4 pb-2">
@@ -267,7 +323,8 @@
                                                     <div class="form-outline">
                                                         <input type="text" id="college_name" name="college_name"
                                                             class="form-control form-control-lg" required />
-                                                        <label class="form-label" for="college_name">College/University Name</label>
+                                                        <label class="form-label" for="college_name">College/University
+                                                            Name</label>
                                                     </div>
                                                 </div>
 
@@ -276,7 +333,8 @@
                                                     <div class="form-outline">
                                                         <input type="text" id="recommender_name" name="recommender_name"
                                                             class="form-control form-control-lg" required />
-                                                        <label class="form-label" for="recommender_name">Name of the Person Who Referred You</label>
+                                                        <label class="form-label" for="recommender_name">Name of the
+                                                            Person Who Referred You</label>
                                                     </div>
                                                 </div>
 
@@ -286,7 +344,8 @@
                                                             name="recommender_designation"
                                                             class="form-control form-control-lg" required />
                                                         <label class="form-label"
-                                                            for="recommender_designation">Designation of the Referrer</label>
+                                                            for="recommender_designation">Designation of the
+                                                            Referrer</label>
                                                     </div>
                                                 </div>
 
@@ -296,7 +355,8 @@
                                                         <div class="form-outline">
                                                             <input type="number" id="year_of_study" name="year_of_study"
                                                                 class="form-control form-control-lg" required />
-                                                            <label class="form-label" for="year_of_study">Year of Study</label>
+                                                            <label class="form-label" for="year_of_study">Year of
+                                                                Study</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -312,8 +372,10 @@
 
                                                 <!-- Upload Letter of Recommendation -->
                                                 <div class="mb-4 pb-2">
-                                                    <label class="form-label" for="letter_of_recommendation_path">Upload Letter of Recommendation (PDF Only)</label>
-                                                    <input style="font-size: 15px;" type="file" id="letter_of_recommendation_path"
+                                                    <label class="form-label" for="letter_of_recommendation_path">Upload
+                                                        Letter of Recommendation (PDF Only)</label>
+                                                    <input style="font-size: 15px;" type="file"
+                                                        id="letter_of_recommendation_path"
                                                         name="letter_of_recommendation_path"
                                                         class="form-control form-control-lg" accept="application/pdf"
                                                         required />
@@ -367,7 +429,8 @@
                                                         <div class="form-outline form-white">
                                                             <input type="date" id="date_of_birth" name="date_of_birth"
                                                                 class="form-control form-control-lg" required />
-                                                            <label class="form-label" for="date_of_birth">Date of Birth</label>
+                                                            <label class="form-label" for="date_of_birth">Date of
+                                                                Birth</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -386,29 +449,34 @@
                                                         <div class="form-outline form-white">
                                                             <input type="text" id="phone_number" name="phone_number"
                                                                 class="form-control form-control-lg" required />
-                                                            <label class="form-label" for="phone_number">Phone number</label>
+                                                            <label class="form-label" for="phone_number">Phone
+                                                                number</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-7 mb-4 pb-2">
                                                         <div class="form-outline form-white">
                                                             <input type="email" id="email_address" name="email_address"
                                                                 class="form-control form-control-lg" required />
-                                                            <label class="form-label" for="email_address">Your Email</label>
+                                                            <label class="form-label" for="email_address">Your
+                                                                Email</label>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <!-- Terms Checkbox -->
                                                 <div class="form-check d-flex justify-content-start mb-4 pb-3">
-                                                    <input style="margin-top: 10px;" class="form-check-input me-3" type="checkbox" value=""
-                                                        id="terms-accepted" required />
-                                                    <label class="form-check-label d-flex text-white" for="terms-accepted">
-                                                        I accept the &nbsp;&nbsp;<a href="#!" class="text-white"><u>Terms and Conditions</u></a>
+                                                    <input style="margin-top: 10px;" class="form-check-input me-3"
+                                                        type="checkbox" value="" id="terms-accepted" required />
+                                                    <label class="form-check-label d-flex text-white"
+                                                        for="terms-accepted">
+                                                        I accept the &nbsp;&nbsp;<a href="#!"
+                                                            class="text-white"><u>Terms and Conditions</u></a>
                                                     </label>
                                                 </div>
 
                                                 <!-- Submit Button -->
-                                                <button type="submit" class="btn btn-light btn-lg">Submit Application</button>
+                                                <button type="submit" class="btn btn-light btn-lg">Submit
+                                                    Application</button>
                                             </div>
                                         </div>
                                     </div>

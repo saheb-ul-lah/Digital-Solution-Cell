@@ -26,66 +26,65 @@
 
   <style>
     /* General styling for card and table */
-.card {
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-.table-hover tbody tr:hover {
-  background-color: #f9f9f9;
-}
+    .table-hover tbody tr:hover {
+      background-color: #f9f9f9;
+    }
 
-.table thead th {
-  background-color: #f4f5f7;
-  font-weight: bold;
-  text-align: left;
-}
+    .table thead th {
+      background-color: #f4f5f7;
+      font-weight: bold;
+      text-align: left;
+    }
 
-.table th,
-.table td {
-  padding: 15px;
-  vertical-align: middle;
-}
+    .table th,
+    .table td {
+      padding: 15px;
+      vertical-align: middle;
+    }
 
-.table td {
-  border-top: none;
-}
+    .table td {
+      border-top: none;
+    }
 
-/* Search bar and filter styling */
-#searchApplication {
-  border-radius: 0.25rem 0 0 0.25rem;
-  border-right: none;
-}
+    /* Search bar and filter styling */
+    #searchApplication {
+      border-radius: 0.25rem 0 0 0.25rem;
+      border-right: none;
+    }
 
-#searchBtn {
-  border-radius: 0 0.25rem 0.25rem 0;
-}
+    #searchBtn {
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
 
-#filterBtn {
-  margin-left: 15px;
-}
+    #filterBtn {
+      margin-left: 15px;
+    }
 
-/* Pagination styling */
-.pagination .page-item.active .page-link {
-  background-color: #ffc107;
-  border-color: #ffc107;
-}
+    /* Pagination styling */
+    .pagination .page-item.active .page-link {
+      background-color: #ffc107;
+      border-color: #ffc107;
+    }
 
-.pagination .page-item .page-link {
-  color: #6c757d;
-  border: 1px solid #dee2e6;
-  margin: 0 3px;
-}
+    .pagination .page-item .page-link {
+      color: #6c757d;
+      border: 1px solid #dee2e6;
+      margin: 0 3px;
+    }
 
-.pagination .page-item .page-link:hover {
-  background-color: #f0f0f0;
-}
+    .pagination .page-item .page-link:hover {
+      background-color: #f0f0f0;
+    }
 
-/* Badge styling */
-.badge {
-  font-size: 0.8rem;
-}
-
+    /* Badge styling */
+    .badge {
+      font-size: 0.8rem;
+    }
   </style>
 
 </head>
@@ -274,25 +273,13 @@
               <i class="mdi mdi-home menu-icon"></i>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-              aria-controls="ui-basic">
-              <span class="menu-title">Projects</span>
-              <i class="menu-arrow"></i>
-              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="./create-new-project.html">Create new project</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./view-project.html">View project</a>
-                </li>
-              </ul>
-            </div>
-          </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="view-project.html">
+              <span class="menu-title">View project</span>
+              <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="registered-clients.html">
               <span class="menu-title">Registered Clients</span>
@@ -315,6 +302,7 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <span class="menu-title">Applications</span>
+              <i class="menu-arrow"></i>
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
             <div class="collapse" id="tables">
@@ -537,31 +525,44 @@
               </ul>
             </nav>
           </div>
-      
+
           <!-- Applications List Section -->
           <div class="row">
             <!-- Filter and Search Bar -->
             <div class="col-12 mb-4">
               <div class="d-flex justify-content-between align-items-center">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search by intern or project..." id="searchApplication">
-                  <button class="btn btn-gradient-warning" type="button" id="searchBtn"><i class="mdi mdi-magnify"></i></button>
-                </div>
-                <div class="dropdown">
-                  <button class="btn btn-gradient-warning dropdown-toggle" id="filterBtn" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Filter <i class="mdi mdi-filter"></i>
+                <!-- Search Bar -->
+                <div class="input-group" style="flex-grow: 1; margin-right: 20px;">
+                  <input type="text" class="form-control" placeholder="Search by intern or project..."
+                    id="searchApplication" style="padding: 10px; border-radius: 5px;">
+                  <button class="btn btn-gradient-warning" type="button" id="searchBtn">
+                    <i class="mdi mdi-magnify"></i>
                   </button>
-                  <div class="dropdown-menu" aria-labelledby="filterBtn">
-                    <a class="dropdown-item" href="#" id="filterInProgress">In Progress</a>
-                    <a class="dropdown-item" href="#" id="filterCompleted">Completed</a>
-                    <a class="dropdown-item" href="#" id="filterPending">Pending Review</a>
-                    <a class="dropdown-item" href="#" id="filterAll">All Applications</a>
-                  </div>
+                </div>
+
+                <!-- Modern Filter Dropdown -->
+                <div>
+                  <select id="filterSelect" style="
+                      padding: 12px 20px;
+                      width: 200px;
+                      border: none;
+                      border-radius: 8px;
+                      background-color: lightyellow;
+                      color: #333;
+                      font-size: 16px;
+                      font-weight: 500;
+                      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                      transition: all 0.3s ease;
+                      cursor: pointer;">
+                    <option value="All Applications">All Applications</option>
+                    <option value="Accept">Accepted</option>
+                    <option value="Hold">On Hold</option>
+                    <option value="Reject">Rejected</option>
+                  </select>
                 </div>
               </div>
             </div>
-      
+
             <!-- Applications Table -->
             <div class="col-lg-12 stretch-card">
               <div class="card">
@@ -571,12 +572,15 @@
                     <table class="table table-hover">
                       <thead>
                         <tr>
+                          <th>Action</th>
+                          <th>Current Status</th>
                           <th>Application ID</th>
                           <th>Intern Name</th>
-                          <th>Project</th>
+                          <th>Internship Role</th>
+                          <th>College Name</th>
                           <th>Submission Date</th>
-                          <th>Status</th>
-                          <th>Action</th>
+                          <th>Submission Date</th>
+                          <th>Change Status</th>
                         </tr>
                       </thead>
                       <tbody id="applicationsList">
@@ -587,7 +591,7 @@
                 </div>
               </div>
             </div>
-      
+
             <!-- Pagination -->
             <div class="col-12 mt-4 d-flex justify-content-center">
               <nav>
@@ -597,9 +601,37 @@
               </nav>
             </div>
           </div>
+
+          <!-- Delete Confirmation Modal -->
+          <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog"
+            aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteConfirmationLabel">Confirm Deletion</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to delete this application?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    id="cancelDeleteBtn">Cancel</button>
+                  <button type="button" class="btn btn-danger" id="deleteConfirmBtn">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-      
+
+
+
+
+
 
 
 
@@ -610,142 +642,196 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-  // Mock Data for Intern Applications
-  const applications = [
-    { id: '201', intern: 'John Doe', project: 'Website Redesign', submissionDate: '2024-09-01', status: 'In Progress' },
-    { id: '202', intern: 'Jane Smith', project: 'Mobile App Development', submissionDate: '2024-09-03', status: 'Completed' },
-    { id: '203', intern: 'Sam Green', project: 'Cloud Migration', submissionDate: '2024-09-05', status: 'Pending Review' },
-    { id: '204', intern: 'Mike Brown', project: 'E-commerce Platform', submissionDate: '2024-09-07', status: 'In Progress' },
-    { id: '205', intern: 'Lisa White', project: 'SEO Optimization', submissionDate: '2024-09-10', status: 'Completed' },
-  ];
+      const applicationsList = document.getElementById('applicationsList');
+      const pagination = document.getElementById('pagination');
+      const searchInput = document.getElementById('searchApplication');
+      const filterSelect = document.getElementById('filterSelect');
 
-  const applicationsList = document.getElementById('applicationsList');
-  const pagination = document.getElementById('pagination');
-  const searchInput = document.getElementById('searchApplication');
-  const filterBtn = document.getElementById('filterBtn');
-  const filterDropdown = document.getElementById('filterBtn').nextElementSibling;
+      // Initialize state
+      let currentPage = 1;
+      const pageSize = 5;
+      let currentFilter = 'All Applications';
+      let applicationToDelete = null; // Store the application ID to delete
 
-  // Initialize state
-  let currentPage = 1;
-  const pageSize = 5;
-  let currentFilter = 'All Applications';
+      // Function to fetch applications from server
+      function fetchApplications() {
+        fetch('fetch_and_delete_intern_applications.php')
+          .then(response => {
+            if (!response.ok) {
+              console.error('HTTP error', response.status);
+              throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            return response.json();
+          })
+          .then(data => {
+            renderApplications(data);
+          })
+          .catch(error => {
+            console.error('Error fetching applications:', error);
+            alert('Failed to fetch applications. Check console for details.'); // Alert user
+          });
 
-  // Function to render applications list
-  function renderApplications(page = 1, searchQuery = '', filterQuery = currentFilter) {
-    const filteredApplications = applications.filter(app =>
-      (app.intern.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        app.project.toLowerCase().includes(searchQuery.toLowerCase())) &&
-      (filterQuery === 'All Applications' || app.status === filterQuery)
-    );
+      }
 
-    const paginatedApplications = filteredApplications.slice((page - 1) * pageSize, page * pageSize);
+      // Function to render applications list
+      function renderApplications(applications) {
+        const searchTerm = searchInput.value.toLowerCase();
 
-    applicationsList.innerHTML = '';
-    paginatedApplications.forEach(application => {
-      const row = `
-        <tr>
-            <td>${application.id}</td>
-            <td>${application.intern}</td>
-            <td>${application.project}</td>
-            <td>${application.submissionDate}</td>
-            <td><span class="badge badge-${getStatusClass(application.status)}">${application.status}</span></td>
-            <td>
+        // Filter applications based on search term and current filter
+        const filteredApplications = applications.filter(app =>
+          (app.id.toString().includes(searchTerm) || // Application ID
+            `${app.first_name} ${app.last_name}`.toLowerCase().includes(searchTerm) || // Intern Name
+            app.internship_role.toLowerCase().includes(searchTerm) || // Internship Role
+            app.college_name.toLowerCase().includes(searchTerm)) && // College Name
+          (currentFilter === 'All Applications' || app.status === currentFilter) // Current Filter
+        );
+
+        const paginatedApplications = filteredApplications.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+        applicationsList.innerHTML = '';
+        paginatedApplications.forEach(application => {
+          const row = `
+            <tr>
+              <td>
                 <button class="btn btn-sm btn-gradient-warning" onclick="viewApplication('${application.id}')">View</button>
                 <button class="btn btn-sm btn-light" onclick="editApplication('${application.id}')">Edit</button>
-            </td>
-        </tr>
-        `;
-      applicationsList.insertAdjacentHTML('beforeend', row);
-    });
+                <button class="btn btn-sm btn-danger" onclick="confirmDelete('${application.id}')">Delete</button>
+              </td>
+              <td style="
+                ${application.status === 'Hold' ? `color:#FEDD36;font-weight:700;` : ''}
+                ${application.status === 'Accept' ? `color:#1BCFB4;font-weight:700;` : ''}
+                ${application.status === 'Reject' ? `color: #FE90A6;font-weight:700;` : ''}
+              ">
+                ${application.status === 'Hold' ? 'On hold' : ''}
+                ${application.status === 'Accept' ? 'Accepted' : ''}
+                ${application.status === 'Reject' ? 'Rejected' : ''}
+              </td>
+              <td>${application.id}</td>
+              <td>${application.first_name} ${application.last_name}</td>
+              <td>${application.internship_role}</td>
+              <td>${application.college_name}</td>
+              <td>${application.application_date}</td>
+              <td>
+                <button class="btn btn-sm btn-success" onclick="changeStatus('${application.id}', 'Accept')">Accept</button>
+                <button class="btn btn-sm btn-warning" onclick="changeStatus('${application.id}', 'Hold')">Hold</button>
+                <button class="btn btn-sm btn-danger" onclick="changeStatus('${application.id}', 'Reject')">Reject</button>
+              </td>
+            </tr>
+          `;
+          applicationsList.insertAdjacentHTML('beforeend', row);
+        });
 
-    renderPagination(filteredApplications.length);
-  }
+        renderPagination(filteredApplications.length);
+      }
 
-  // Function to set status badge classes
-  function getStatusClass(status) {
-    switch (status) {
-      case 'In Progress': return 'warning';
-      case 'Completed': return 'success';
-      case 'Pending Review': return 'secondary';
-      default: return 'light';
-    }
-  }
+      // Function to change status
+      window.changeStatus = function (id, newStatus) {
+        fetch('fetch_and_delete_intern_applications.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: id, status: newStatus }), // Sending the new status
+        })
+          .then(response => response.json())
+          .then(result => {
+            if (result.success) {
+              console.log(`Status changed successfully for ID ${id}`); // Log success
+              fetchApplications(); // Re-fetch applications to show updated statuses
+            } else {
+              console.error('Error changing status:', result.error);
+            }
+          })
+          .catch(error => console.error('Error changing status:', error));
+      };
 
-  // Function to render pagination
-  function renderPagination(totalCount) {
-    const totalPages = Math.ceil(totalCount / pageSize);
-    pagination.innerHTML = '';
-    for (let i = 1; i <= totalPages; i++) {
-      const pageItem = `
-        <li class="page-item ${i === currentPage ? 'active' : ''}">
-            <a class="page-link" href="#">${i}</a>
-        </li>
-        `;
-      pagination.insertAdjacentHTML('beforeend', pageItem);
-    }
+      // Function to confirm deletion
+      window.confirmDelete = function (id) {
+        applicationToDelete = id; // Store the application ID
+        $('#deleteConfirmationModal').modal('show'); // Show the modal (using Bootstrap)
+      };
 
-    // Add event listeners for pagination
-    document.querySelectorAll('.page-item').forEach((item, index) => {
-      item.addEventListener('click', function (e) {
-        e.preventDefault();
-        currentPage = index + 1; // Set the current page
-        renderApplications(currentPage, searchInput.value, currentFilter); // Re-render applications
+      // Function to delete an application
+      document.getElementById('deleteConfirmBtn').addEventListener('click', function () {
+        fetch(`fetch_and_delete_intern_applications.php`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: applicationToDelete, action: 'delete' }), // Sending delete action
+        })
+          .then(response => response.json())
+          .then(result => {
+            if (result.success) {
+              console.log(`Application with ID ${applicationToDelete} deleted successfully`); // Log success
+              $('#deleteConfirmationModal').modal('hide'); // Hide the modal
+              fetchApplications(); // Re-fetch applications
+            } else {
+              console.error('Error deleting application:', result.error);
+            }
+          })
+          .catch(error => {
+            console.error("Error deleting application:", error);
+          });
       });
+
+      // Close modal on cancel
+      document.getElementById('cancelDeleteBtn').addEventListener('click', function () {
+        $('#deleteConfirmationModal').modal('hide');
+      });
+
+      // Function to render pagination
+      function renderPagination(totalItems) {
+        const totalPages = Math.ceil(totalItems / pageSize);
+        pagination.innerHTML = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+          const activeClass = i === currentPage ? 'active' : '';
+          const pageItem = `
+            <li class="page-item ${activeClass}">
+              <a class="page-link" href="javascript:void(0)" onclick="changePage(${i})">${i}</a>
+            </li>
+          `;
+          pagination.insertAdjacentHTML('beforeend', pageItem);
+        }
+      }
+
+      // Function to handle page change
+      window.changePage = function (page) {
+        currentPage = page;
+        fetchApplications();
+      };
+
+      // Search handler
+      searchInput.addEventListener('input', function () {
+        currentPage = 1; // Reset to the first page
+        fetchApplications(); // Fetch applications based on search term
+      });
+
+      // Filter handler
+      filterSelect.addEventListener('change', function () {
+        currentFilter = this.value; // Update the current filter
+        currentPage = 1; // Reset to the first page
+        fetchApplications(); // Fetch applications based on selected filter
+      });
+
+      // View and Edit Button Handlers
+      window.editApplication = function (id) {
+        window.location.href = `edit-intern-application.html?applicationId=${id}`;
+      };
+
+      window.viewApplication = function (id) {
+        window.location.href = `view-intern-application.html?applicationId=${id}`;
+      };
+
+      // Fetch initial applications on page load
+      fetchApplications();
     });
-  }
-
-  // Live Search Functionality
-  searchInput.addEventListener('input', function () {
-    renderApplications(currentPage, searchInput.value, currentFilter); // Re-render applications on input
-  });
-
-  // Dropdown filter functionality
-  filterBtn.addEventListener('click', function () {
-    filterDropdown.classList.toggle('show');
-  });
-
-  document.addEventListener('click', function (event) {
-    if (!event.target.closest('.dropdown')) {
-      filterDropdown.classList.remove('show');
-    }
-  });
-
-  document.getElementById('filterInProgress').addEventListener('click', function () {
-    currentFilter = 'In Progress';
-    renderApplications(currentPage, searchInput.value, currentFilter);
-  });
-
-  document.getElementById('filterCompleted').addEventListener('click', function () {
-    currentFilter = 'Completed';
-    renderApplications(currentPage, searchInput.value, currentFilter);
-  });
-
-  document.getElementById('filterPending').addEventListener('click', function () {
-    currentFilter = 'Pending Review';
-    renderApplications(currentPage, searchInput.value, currentFilter);
-  });
-
-  document.getElementById('filterAll').addEventListener('click', function () {
-    currentFilter = 'All Applications';
-    renderApplications(currentPage, searchInput.value, currentFilter);
-  });
-
-  // Functions for navigation
-  window.viewApplication = function (id) {
-    // Redirect to view page with application id as a query parameter
-    window.location.href = `view-intern-application.html?applicationId=${id}`;
-  };
-
-  window.editApplication = function (id) {
-    // Redirect to edit page with application id as a query parameter
-    window.location.href = `edit-intern-application.html?applicationId=${id}`;
-  };
-
-  // Initial render
-  renderApplications(currentPage);
-});
-
   </script>
+
+
+
+
 
 
 

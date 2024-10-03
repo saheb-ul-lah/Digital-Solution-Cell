@@ -209,25 +209,13 @@
               <i class="mdi mdi-home menu-icon"></i>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-              aria-controls="ui-basic">
-              <span class="menu-title">Projects</span>
-              <i class="menu-arrow"></i>
-              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="./create-new-project.html">Create new project</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./view-project.html">View project</a>
-                </li>
-              </ul>
-            </div>
-          </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="view-project.html">
+              <span class="menu-title">View project</span>
+              <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="registered-clients.html">
               <span class="menu-title">Registered Clients</span>
@@ -250,6 +238,7 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <span class="menu-title">Applications</span>
+              <i class="menu-arrow"></i>
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
             <div class="collapse" id="tables">
@@ -484,47 +473,40 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Edit Project Details</h4>
-                  <form class="forms-sample" id="editProjectForm">
+                  <form class="forms-sample" id="editProjectForm"> 
                     <!-- Project Title -->
                     <div class="form-group">
-                      <label for="projectTitle">Project Title</label>
-                      <input type="text" class="form-control" id="projectTitle" placeholder="Enter project title">
+                        <label for="projectTitle">Project Title</label>
+                        <input type="text" class="form-control" id="projectTitle" placeholder="Enter project title">
                     </div>
-
+                
                     <!-- Assigned To -->
                     <div class="form-group">
-                      <label for="assignedTo">Assigned To</label>
-                      <input type="text" class="form-control" id="assignedTo" placeholder="Enter manager's name">
+                        <label for="assignedTo">Assigned To</label>
+                        <input type="text" class="form-control" id="assignedTo" placeholder="Enter manager's name">
                     </div>
-
+                
                     <!-- Status -->
                     <div class="form-group">
-                      <label for="projectStatus">Status</label>
-                      <select class="form-control" id="projectStatus">
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                        <option value="On Hold">On Hold</option>
-                      </select>
+                        <label for="projectStatus">Status</label>
+                        <select class="form-control" id="projectStatus">
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                            <option value="On Hold">On Hold</option>
+                        </select>
                     </div>
-
+                
                     <!-- Completion Date -->
                     <div class="form-group">
-                      <label for="completionDate">Completion Date</label>
-                      <input type="date" class="form-control" id="completionDate">
+                        <label for="completionDate">Completion Date</label>
+                        <input type="date" class="form-control" id="completionDate">
                     </div>
-
-                    <!-- Project Description -->
-                    <div class="form-group">
-                      <label for="projectDescription">Project Description</label>
-                      <textarea class="form-control" id="projectDescription" rows="4"
-                        placeholder="Enter project description"></textarea>
-                    </div>
-
+                
                     <!-- Form Actions -->
-                    <button type="submit" class="btn btn-gradient-primary me-2">Update</button>
-                    <button type="button" class="btn btn-light"
-                      onclick="window.location.href='view-project.html'">Cancel</button>
-                  </form>
+                    <button type="submit" id="submit-btn" class="btn btn-gradient-primary me-2">Update</button>
+                    <button type="button" class="btn btn-light" onclick="window.location.href='view-project.html'">Cancel</button>
+                </form>
+                
                 </div>
               </div>
             </div>
@@ -540,56 +522,93 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Get project ID from query string
-      const urlParams = new URLSearchParams(window.location.search);
-      const projectId = urlParams.get('projectId');
+        // Get project ID from query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('projectId');
 
-      // Fetch project data based on the project ID (this would typically be done via an API)
-      function loadProjectData(projectId) {
-        // Placeholder for actual data fetching logic (you would replace this with an API call)
-        const projectData = {
-          title: "Website Redesign",
-          assignedTo: "John Doe",
-          status: "In Progress",
-          completionDate: "2024-12-30",
-          description: "This project involves a complete redesign of the company website."
-        };
+        // Fetch project data using AJAX
+        function loadProjectData(projectId) {
+            fetch(`edit_project.php?projectId=${projectId}`)
+                .then(response => response.json())
+                .then(projectData => {
+                    console.log("Received project data:", projectData);
+                    if (projectData.error) {
+                        alert("Error: " + projectData.error);
+                    } else {
+                        // Populate form fields with fetched project data
+                        const fields = [
+                            { id: 'projectTitle', key: 'project_title' },
+                            { id: 'assignedTo', key: 'project_manager' },
+                            { id: 'projectStatus', key: 'project_status' },
+                            { id: 'completionDate', key: 'completion_date' }
+                        ];
 
-        // Populate the form with project data
-        document.getElementById('projectTitle').value = projectData.title;
-        document.getElementById('assignedTo').value = projectData.assignedTo;
-        document.getElementById('projectStatus').value = projectData.status;
-        document.getElementById('completionDate').value = projectData.completionDate;
-        document.getElementById('projectDescription').value = projectData.description;
-      }
+                        fields.forEach(field => {
+                            const element = document.getElementById(field.id);
+                            if (element) {
+                                element.value = projectData[field.key];
+                            } else {
+                                console.error(`Element with id '${field.id}' not found`);
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching project data:", error);
+                    alert("Error fetching project data: " + error);
+                });
+        }
 
-      // Call loadProjectData on page load
-      if (projectId) {
-        loadProjectData(projectId);
-      }
+        // Load the project data when page is loaded
+        if (projectId) {
+            loadProjectData(projectId);
+        } else {
+            console.error("No projectId found in URL");
+        }
 
-      // Handle form submission
-      document.getElementById('editProjectForm').addEventListener('submit', function (event) {
-        event.preventDefault();
+        // Handle form submission to update the project
+        const form = document.getElementById('editProjectForm');
+        if (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
 
-        // Get the form values
-        const updatedProject = {
-          title: document.getElementById('projectTitle').value,
-          assignedTo: document.getElementById('assignedTo').value,
-          status: document.getElementById('projectStatus').value,
-          completionDate: document.getElementById('completionDate').value,
-          description: document.getElementById('projectDescription').value,
-        };
+                // Gather updated project data from form
+                const updatedProject = {
+                    projectId: projectId,
+                    projectTitle: document.getElementById('projectTitle').value,
+                    assignedTo: document.getElementById('assignedTo').value,
+                    projectStatus: document.getElementById('projectStatus').value,
+                    completionDate: document.getElementById('completionDate').value
+                };
 
-        // Update the project (you would send this data to an API)
-        console.log("Updated project:", updatedProject);
+                console.log("Sending updated project data:", updatedProject);
 
-        // Redirect back to the project view page (after successful update)
-        window.location.href = 'view-project.html';
-      });
+                // Send updated project data to PHP via AJAX
+                fetch('edit_project.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedProject)
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            // Redirect to view-project.html after successful update
+                            window.location.href = 'view-project.html';
+                        } else {
+                            alert("Error updating project: " + result.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error updating project:", error);
+                        alert("Error updating project: " + error);
+                    });
+            });
+        } else {
+            console.error("Form with id 'editProjectForm' not found");
+        }
     });
 
-  </script>
+   </script>
 
 
 
