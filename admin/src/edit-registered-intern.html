@@ -571,23 +571,15 @@
                               placeholder="Enter team number" required> -->
 
                             <!--  -->
-                            <select class="form-control" id="teamNo" name="teamNo">
-                              <option value="1">Team 1</option>
-                              <option value="2">Team 2</option>
-                              <option value="3">Team 3</option>
-                              <option value="4">Team 4</option>
-                              <option value="5">Team 5</option>
-                              <option value="6">Team 6</option>
-                              <option value="7">Team 7</option>
-                              <option value="8">Team 8</option>
-                              <option value="9">Team 9</option>
-                              <option value="10">Team 10</option>
+                            <select class="form-control" id="teamNo" name="teamNo" required>
+                              <!-- Options will be populated dynamically -->
                             </select>
+
                             <!--  -->
                           </div>
                           <br>
                           <label for="internshipRole">Internship Role</label>
-                          <select class="form-control" id="internshipRole" name="internshipRole">
+                          <select class="form-control" id="internshipRole" name="internshipRole" required>
                             <option selected disabled>Select Internship Role</option>
                             <option value="frontend">Frontend Developer</option>
                             <option value="backend">Backend Developer</option>
@@ -669,41 +661,77 @@
       const internId = urlParams.get('internId');
       document.getElementById('internId').value = internId; // Set the hidden input value
 
-      // Fetch intern details from the server
-      fetch(`edit-registered-interns.php?internId=${internId}`)
+      const teamNoSelect = document.getElementById('teamNo');
+
+      // Fetch team numbers from the server
+      fetch('fetch-team-members.php')
         .then(response => response.json())
         .then(data => {
-          if (data.success && data.intern) {
-            // Pre-fill form fields with intern details
-            document.getElementById('firstName').value = data.intern.first_name;
-            document.getElementById('lastName').value = data.intern.last_name;
-            document.getElementById('email').value = data.intern.email_address;
-            document.getElementById('phoneNumber').value = data.intern.phone_number;
-            document.getElementById('collegeName').value = data.intern.college_name;
-            document.getElementById('internshipRole').value = data.intern.internship_role; // Update to set the dropdown value
-            document.getElementById('yearOfStudy').value = data.intern.year_of_study; // Added yearOfStudy
-            document.getElementById('teamNo').value = data.intern.team_no; // Added teamNo
-            document.getElementById('recommenderName').value = data.intern.recommender_name; // Added recommenderName
-            document.getElementById('recommenderDesignation').value = data.intern.recommender_designation; // Added recommenderDesignation
-            document.getElementById('address').value = data.intern.address; // Added address
-            document.getElementById('zipCode').value = data.intern.zip_code; // Added zipCode
-            document.getElementById('city').value = data.intern.city; // Added city
-            document.getElementById('state').value = data.intern.state; // Added state
-            document.getElementById('country').value = data.intern.country; // Added country
-            document.getElementById('internshipDuration').value = data.intern.internship_duration; // Added internshipDuration
-            document.getElementById('letterOfRecommendation').value = data.intern.letter_of_recommendation_path; // Added letterOfRecommendation
-            document.getElementById('dateOfBirth').value = data.intern.date_of_birth; // Added dateOfBirth
+          if (data.success && data.teams) {
+            // Clear existing options
+            teamNoSelect.innerHTML = '';
+
+            // Add a default option
+            const defaultOption = document.createElement('option');
+            defaultOption.textContent = 'Select Team Number';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            teamNoSelect.appendChild(defaultOption);
+
+            // Add options dynamically
+            data.teams.forEach(teamNo => {
+              const option = document.createElement('option');
+              option.value = teamNo;
+              option.textContent = `Team ${teamNo}`;
+              teamNoSelect.appendChild(option);
+            });
+            
+            // Now that the team numbers are populated, fetch intern details
+            fetch(`edit-registered-interns.php?internId=${internId}`)
+              .then(response => response.json())
+              .then(data => {
+                if (data.success && data.intern) {
+                  // Pre-fill form fields with intern details
+                  document.getElementById('firstName').value = data.intern.first_name;
+                  document.getElementById('lastName').value = data.intern.last_name;
+                  document.getElementById('email').value = data.intern.email_address;
+                  document.getElementById('phoneNumber').value = data.intern.phone_number;
+                  document.getElementById('collegeName').value = data.intern.college_name;
+                  document.getElementById('internshipRole').value = data.intern.internship_role; // Update to set the dropdown value
+                  document.getElementById('yearOfStudy').value = data.intern.year_of_study; // Added yearOfStudy
+                  document.getElementById('recommenderName').value = data.intern.recommender_name; // Added recommenderName
+                  document.getElementById('recommenderDesignation').value = data.intern.recommender_designation; // Added recommenderDesignation
+                  document.getElementById('address').value = data.intern.address; // Added address
+                  document.getElementById('zipCode').value = data.intern.zip_code; // Added zipCode
+                  document.getElementById('city').value = data.intern.city; // Added city
+                  document.getElementById('state').value = data.intern.state; // Added state
+                  document.getElementById('country').value = data.intern.country; // Added country
+                  document.getElementById('internshipDuration').value = data.intern.internship_duration; // Added internshipDuration
+                  document.getElementById('letterOfRecommendation').value = data.intern.letter_of_recommendation_path; // Added letterOfRecommendation
+                  document.getElementById('dateOfBirth').value = data.intern.date_of_birth; // Added dateOfBirth
+
+                  // Set the team number after the dropdown is populated
+                  document.getElementById('teamNo').value = data.intern.team_no;
+                } else {
+                  alert('Intern not found.');
+                  window.location.href = 'registered-interns.html'; // Redirect if not found
+                }
+              })
+              .catch(error => {
+                console.error('Error fetching intern data:', error);
+                alert('An error occurred while fetching intern data.');
+              });
+
           } else {
-            alert('Intern not found.');
-            window.location.href = 'registered-interns.html'; // Redirect if not found
+            console.error('No team numbers found.');
           }
         })
         .catch(error => {
-          console.error('Error fetching intern data:', error);
-          alert('An error occurred while fetching intern data.');
+          console.error('Error fetching team numbers:', error);
         });
     });
-</script>
+
+  </script>
 
 
 
