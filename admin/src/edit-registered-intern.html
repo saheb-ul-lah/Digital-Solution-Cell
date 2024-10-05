@@ -505,40 +505,127 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Edit Intern Information</h4>
-                  <form id="editInternForm">
+                  <form id="editInternForm" action="edit-registered-interns.php" method="POST">
+                    <input type="hidden" id="internId" name="internId"> <!-- Hidden input for the intern ID -->
                     <div class="row">
                       <div class="col-md-6">
+                        <!-- <div class="form-group">
+                          <label for="title">Title</label>
+                          <select class="form-control" id="title" name="title" required>
+                            <option selected disabled>Select Title</option>
+                            <option value="Mr">Mr.</option>
+                            <option value="Ms">Ms.</option>
+                            <option value="Mrs">Mrs.</option>
+                          </select>
+                        </div> -->
                         <div class="form-group">
-                          <label for="internName">Full Name</label>
-                          <input type="text" class="form-control" id="internName" placeholder="Enter full name">
+                          <label for="firstName">First Name</label>
+                          <input type="text" class="form-control" id="firstName" name="firstName"
+                            placeholder="Enter first name" required>
                         </div>
                         <div class="form-group">
-                          <label for="internEmail">Email address</label>
-                          <input type="email" class="form-control" id="internEmail" placeholder="Enter email">
+                          <label for="lastName">Last Name</label>
+                          <input type="text" class="form-control" id="lastName" name="lastName"
+                            placeholder="Enter last name" required>
                         </div>
                         <div class="form-group">
-                          <label for="internPhone">Phone Number</label>
-                          <input type="text" class="form-control" id="internPhone" placeholder="Enter phone number">
+                          <label for="email">Email Address</label>
+                          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
+                            required>
+                        </div>
+                        <div class="form-group">
+                          <label for="phoneNumber">Phone Number</label>
+                          <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+                            placeholder="Enter phone number" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="collegeName">College Name</label>
+                          <input type="text" class="form-control" id="collegeName" name="collegeName"
+                            placeholder="Enter college name" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="yearOfStudy">Year of Study</label>
+                          <input type="number" class="form-control" id="yearOfStudy" name="yearOfStudy"
+                            placeholder="Enter year of study" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="recommenderName">Recommender Name</label>
+                          <input type="text" class="form-control" id="recommenderName" name="recommenderName"
+                            placeholder="Enter recommender name" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="recommenderDesignation">Recommender Designation</label>
+                          <input type="text" class="form-control" id="recommenderDesignation"
+                            name="recommenderDesignation" placeholder="Enter recommender designation" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="dateOfBirth">Date of Birth</label>
+                          <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label for="internAddress">Address</label>
-                          <input type="text" class="form-control" id="internAddress" placeholder="Enter address">
+                          <div class="form-group">
+                            <label for="teamNo">Team Number</label>
+                            <input type="number" class="form-control" id="teamNo" name="teamNo"
+                              placeholder="Enter team number" required>
+                          </div>
+                          <br>
+                          <label for="internshipRole">Internship Role</label>
+                          <select class="form-control" id="internshipRole" name="internshipRole">
+                            <option selected disabled>Select Internship Role</option>
+                            <option value="frontend">Frontend Developer</option>
+                            <option value="backend">Backend Developer</option>
+                            <option value="fullstack">Full Stack Developer</option>
+                            <option value="ui/ux">UI/UX Designer</option>
+                            <option value="data analyst">Data Analyst</option>
+                          </select>
+                          <br>
+                          <br>
+                          <label for="internshipDuration">Internship Duration</label>
+                          <select class="form-control" id="internshipDuration" name="internshipDuration" required>
+                            <option selected disabled>Available Durations</option>
+                            <option value="2">2 months</option>
+                            <option value="3">3 months</option>
+                            <option value="6">6 months</option>
+                          </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                          <label for="address">Address</label>
+                          <input type="text" class="form-control" id="address" name="address"
+                            placeholder="Enter address" required>
                         </div>
                         <div class="form-group">
-                          <label for="internJoinDate">Join Date</label>
-                          <input type="date" class="form-control" id="internJoinDate">
+                          <label for="zipCode">PIN Code</label>
+                          <input type="text" class="form-control" id="zipCode" name="zipCode"
+                            placeholder="Enter zip code" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="city">City</label>
+                          <input type="text" class="form-control" id="city" name="city" placeholder="Enter city"
+                            required>
+                        </div>
+                        <div class="form-group">
+                          <label for="state">State</label>
+                          <input type="text" class="form-control" id="state" name="state" placeholder="Enter state"
+                            required>
+                        </div>
+                        <div class="form-group">
+                          <label for="country">Country</label>
+                          <input type="text" class="form-control" id="country" name="country"
+                            placeholder="Enter country" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="letterOfRecommendation">Letter of Recommendation Path</label>
+                          <input type="text" class="form-control" id="letterOfRecommendation"
+                            name="letterOfRecommendation" placeholder="Enter letter of recommendation path" required>
                         </div>
                       </div>
                     </div>
 
-                    <!-- Internship Progress -->
-                    <div class="form-group mt-4">
-                      <label for="internProgress">Internship Progress</label>
-                      <textarea class="form-control" id="internProgress" rows="4"
-                        placeholder="Enter progress description"></textarea>
-                    </div>
+
+
 
                     <!-- Submit and Back Buttons -->
                     <div class="mt-4">
@@ -565,56 +652,48 @@
       // Get internId from the URL
       const urlParams = new URLSearchParams(window.location.search);
       const internId = urlParams.get('internId');
+      document.getElementById('internId').value = internId; // Set the hidden input value
 
-      // Mock data for interns (replace with actual API calls)
-      const interns = [
-        { id: '1', name: 'John Doe', email: 'johndoe@example.com', phone: '+1234567890', address: '123 Main Street, City', joinDate: '2024-01-01', progress: 'Working on project XYZ, completed 75%.' },
-        { id: '2', name: 'Jane Smith', email: 'janesmith@example.com', phone: '+1234567891', address: '456 Oak Street, Town', joinDate: '2024-02-10', progress: 'Completed training, awaiting project assignment.' },
-        { id: '3', name: 'Alice Johnson', email: 'alicej@example.com', phone: '+1234567892', address: '789 Pine Avenue, Village', joinDate: '2024-03-15', progress: 'Researching data for project ABC, completed 40%.' }
-      ];
-
-      // Find the intern details by id
-      const intern = interns.find(intern => intern.id === internId);
-
-      if (intern) {
-        // Pre-fill form fields with intern details
-        document.getElementById('internName').value = intern.name;
-        document.getElementById('internEmail').value = intern.email;
-        document.getElementById('internPhone').value = intern.phone;
-        document.getElementById('internAddress').value = intern.address;
-        document.getElementById('internJoinDate').value = intern.joinDate;
-        document.getElementById('internProgress').value = intern.progress;
-      } else {
-        alert('Intern not found.');
-        window.location.href = 'registered-interns.html'; // Redirect if not found
-      }
-
-      // Handle form submission
-      const editInternForm = document.getElementById('editInternForm');
-      editInternForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        // Get the updated values from the form
-        const updatedIntern = {
-          name: document.getElementById('internName').value,
-          email: document.getElementById('internEmail').value,
-          phone: document.getElementById('internPhone').value,
-          address: document.getElementById('internAddress').value,
-          joinDate: document.getElementById('internJoinDate').value,
-          progress: document.getElementById('internProgress').value,
-        };
-
-        // Perform the update operation (API call or mock update)
-        console.log('Updated intern data:', updatedIntern);
-
-        // Show a success message or redirect to the registered interns list
-        alert('Intern details updated successfully!');
-        window.location.href = 'registered-interns.html';
-      });
+      // Fetch intern details from the server
+      fetch(`edit-registered-interns.php?internId=${internId}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success && data.intern) {
+            // Pre-fill form fields with intern details
+            document.getElementById('firstName').value = data.intern.first_name;
+            document.getElementById('lastName').value = data.intern.last_name;
+            document.getElementById('email').value = data.intern.email_address;
+            document.getElementById('phoneNumber').value = data.intern.phone_number;
+            document.getElementById('collegeName').value = data.intern.college_name;
+            document.getElementById('internshipRole').value = data.intern.internship_role; // Update to set the dropdown value
+            document.getElementById('yearOfStudy').value = data.intern.year_of_study; // Added yearOfStudy
+            document.getElementById('teamNo').value = data.intern.team_no; // Added teamNo
+            document.getElementById('recommenderName').value = data.intern.recommender_name; // Added recommenderName
+            document.getElementById('recommenderDesignation').value = data.intern.recommender_designation; // Added recommenderDesignation
+            document.getElementById('address').value = data.intern.address; // Added address
+            document.getElementById('zipCode').value = data.intern.zip_code; // Added zipCode
+            document.getElementById('city').value = data.intern.city; // Added city
+            document.getElementById('state').value = data.intern.state; // Added state
+            document.getElementById('country').value = data.intern.country; // Added country
+            document.getElementById('internshipDuration').value = data.intern.internship_duration; // Added internshipDuration
+            document.getElementById('letterOfRecommendation').value = data.intern.letter_of_recommendation_path; // Added letterOfRecommendation
+            document.getElementById('dateOfBirth').value = data.intern.date_of_birth; // Added dateOfBirth
+          } else {
+            alert('Intern not found.');
+            window.location.href = 'registered-interns.html'; // Redirect if not found
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching intern data:', error);
+          alert('An error occurred while fetching intern data.');
+        });
     });
+</script>
 
 
-  </script>
+
+
+
 
 
 

@@ -578,7 +578,7 @@
                           <th>Intern Name</th>
                           <th>Internship Role</th>
                           <th>College Name</th>
-                          <th>Submission Date</th>
+                          <th>Rec. Letter</th>
                           <th>Submission Date</th>
                           <th>Change Status</th>
                         </tr>
@@ -710,6 +710,7 @@
               <td>${application.first_name} ${application.last_name}</td>
               <td>${application.internship_role}</td>
               <td>${application.college_name}</td>
+              <td><a href="../../applicationsUpload/${application.letter_of_recommendation_path}">${application.letter_of_recommendation_path}</td>
               <td>${application.application_date}</td>
               <td>
                 <button class="btn btn-sm btn-success" onclick="changeStatus('${application.id}', 'Accept')">Accept</button>

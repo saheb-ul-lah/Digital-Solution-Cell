@@ -493,20 +493,21 @@
                   <h4 class="card-title" id="clientName">Client Name</h4>
                   <div class="row">
                     <div class="col-md-6">
-                      <p><strong>Email:</strong> <span id="clientEmail">Email</span></p>
-                      <p><strong>Phone:</strong> <span id="clientPhone">Phone</span></p>
+                      <p><strong>Designation:</strong> <span id="clientDesignation">Designation</span></p>
+                      <p><strong>Organisation:</strong> <span id="clientOrganisation">Organisation</span></p>
                     </div>
                     <div class="col-md-6">
+                      <p><strong>Email:</strong> <span id="clientEmail">Email</span></p>
+                      <p><strong>Phone:</strong> <span id="clientPhone">Phone</span></p>
                       <p><strong>Address:</strong> <span id="clientAddress">Address</span></p>
-                      <p><strong>Joined on:</strong> <span id="clientJoinDate">Join Date</span></p>
                     </div>
                   </div>
 
                   <!-- Additional Information -->
                   <div class="row mt-4">
                     <div class="col-md-12">
-                      <h5>Project Progress</h5>
-                      <p id="clientProgress">Progress Details</p>
+                      <h5>Project assigned to:</h5>
+                      <p id="assignedTo">Name</p>
                     </div>
                   </div>
 
@@ -550,11 +551,13 @@
 
             // Display client details in the DOM
             document.getElementById('clientName').textContent = client.name;
+            document.getElementById('clientDesignation').textContent = client.designation;
+            document.getElementById('clientOrganisation').textContent = client.organisation;
             document.getElementById('clientEmail').textContent = client.email;
             document.getElementById('clientPhone').textContent = client.phone;
             document.getElementById('clientAddress').textContent = client.address;
-            document.getElementById('clientJoinDate').textContent = new Date(client.join_date).toLocaleDateString(); // Format date
-            document.getElementById('clientProgress').textContent = client.progress; // Assuming you have a progress field
+            // document.getElementById('clientJoinDate').textContent = new Date(client.join_date).toLocaleDateString(); // Format date
+            document.getElementById('assignedTo').textContent = client.project_assigned_to; // Assuming you have a progress field
           } else {
             alert('Client not found.');
             window.location.href = 'registered-clients.html'; // Redirect if not found

@@ -507,40 +507,67 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Edit Client Information</h4>
-                  <form id="editClientForm">
+                  <form id="editClientForm" action="edit-registered-client.php" method="POST">
+                    <input type="hidden" id="clientId" name="clientId"> <!-- Hidden input for the client ID -->
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="clientName">Client Name</label>
-                          <input type="text" class="form-control" id="clientName" placeholder="Enter client name">
+                          <input type="text" class="form-control" id="clientName" name="clientName"
+                            placeholder="Enter client name">
+                        </div>
+                        <div class="form-group">
+                          <label for="clientDesignation">Designation</label>
+                          <input type="text" class="form-control" id="clientDesignation" name="clientDesignation"
+                            placeholder="Enter Designation">
+                        </div>
+                        <div class="form-group">
+                          <label for="clientOrganisation">Organisation</label>
+                          <input type="text" class="form-control" id="clientOrganisation" name="clientOrganisation"
+                            placeholder="Enter Organisation">
                         </div>
                         <div class="form-group">
                           <label for="clientEmail">Email Address</label>
-                          <input type="email" class="form-control" id="clientEmail" placeholder="Enter email">
+                          <input type="email" class="form-control" id="clientEmail" name="clientEmail"
+                            placeholder="Enter email">
                         </div>
                         <div class="form-group">
                           <label for="clientPhone">Phone Number</label>
-                          <input type="text" class="form-control" id="clientPhone" placeholder="Enter phone number">
+                          <input type="text" class="form-control" id="clientPhone" name="clientPhone"
+                            placeholder="Enter phone number">
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="clientAddress">Address</label>
-                          <input type="text" class="form-control" id="clientAddress" placeholder="Enter address">
+                          <input type="text" class="form-control" id="clientAddress" name="clientAddress"
+                            placeholder="Enter address">
                         </div>
                         <div class="form-group">
-                          <label for="clientJoinDate">Join Date</label>
-                          <input type="date" class="form-control" id="clientJoinDate">
+                          <label for="assignedTo">Project assigned to:</label>
+                          <select class="form-control" id="assignedTo" name="assignedTo">
+                            <option value="Team 1">Team 1</option>
+                            <option value="Team 2">Team 2</option>
+                            <option value="Team 3">Team 3</option>
+                            <option value="Team 4">Team 4</option>
+                            <option value="Team 5">Team 5</option>
+                            <option value="Team 6">Team 6</option>
+                            <option value="Team 7">Team 7</option>
+                            <option value="Team 8">Team 8</option>
+                            <option value="Team 9">Team 9</option>
+                            <option value="Team 10">Team 10</option>
+                          </select>
                         </div>
+
                       </div>
                     </div>
 
                     <!-- Project Status -->
-                    <div class="form-group mt-4">
-                      <label for="clientProgress">Project Status</label>
-                      <textarea class="form-control" id="clientProgress" rows="4"
+                    <!-- <div class="form-group mt-4">
+                      <label for="clientProgress">Message</label>
+                      <textarea class="form-control" id="clientProgress" name="clientProgress" rows="4"
                         placeholder="Enter status description"></textarea>
-                    </div>
+                    </div> -->
 
                     <!-- Submit and Back Buttons -->
                     <div class="mt-4">
@@ -566,54 +593,33 @@
       // Get clientId from the URL
       const urlParams = new URLSearchParams(window.location.search);
       const clientId = urlParams.get('clientId');
+      document.getElementById('clientId').value = clientId; // Set the hidden input value
 
-      // Mock data for clients (replace with actual API calls)
-      const clients = [
-        { id: '1', name: 'Acme Corp', email: 'contact@acme.com', phone: '+1234567890', address: '123 Corporate Blvd, Business City', joinDate: '2023-01-01', progress: 'Ongoing projects with a 60% completion rate.' },
-        { id: '2', name: 'Beta Solutions', email: 'info@beta.com', phone: '+1234567891', address: '456 Tech Lane, Innovation Hub', joinDate: '2023-02-10', progress: 'Completed 2 projects, awaiting new assignments.' },
-        { id: '3', name: 'Gamma Inc.', email: 'support@gamma.com', phone: '+1234567892', address: '789 Main Street, Commerce City', joinDate: '2023-03-15', progress: '1 project in progress, 40% complete.' }
-      ];
-
-      // Find the client details by id
-      const client = clients.find(client => client.id === clientId);
-
-      if (client) {
-        // Pre-fill form fields with client details
-        document.getElementById('clientName').value = client.name;
-        document.getElementById('clientEmail').value = client.email;
-        document.getElementById('clientPhone').value = client.phone;
-        document.getElementById('clientAddress').value = client.address;
-        document.getElementById('clientJoinDate').value = client.joinDate;
-        document.getElementById('clientProgress').value = client.progress;
-      } else {
-        alert('Client not found.');
-        window.location.href = 'registered-clients.html'; // Redirect if not found
-      }
-
-      // Handle form submission
-      const editClientForm = document.getElementById('editClientForm');
-      editClientForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        // Get the updated values from the form
-        const updatedClient = {
-          name: document.getElementById('clientName').value,
-          email: document.getElementById('clientEmail').value,
-          phone: document.getElementById('clientPhone').value,
-          address: document.getElementById('clientAddress').value,
-          joinDate: document.getElementById('clientJoinDate').value,
-          progress: document.getElementById('clientProgress').value,
-        };
-
-        // Perform the update operation (API call or mock update)
-        console.log('Updated client data:', updatedClient);
-
-        // Show a success message or redirect to the registered clients list
-        alert('Client details updated successfully!');
-        window.location.href = 'registered-clients.html';
-      });
+      // Fetch client details from the server
+      fetch(`edit-registered-client.php?clientId=${clientId}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success && data.client) {
+            // Pre-fill form fields with client details
+            document.getElementById('clientName').value = data.client.name;
+            document.getElementById('clientDesignation').value = data.client.designation;
+            document.getElementById('clientOrganisation').value = data.client.organisation;
+            document.getElementById('clientEmail').value = data.client.email;
+            document.getElementById('clientPhone').value = data.client.phone;
+            document.getElementById('clientAddress').value = data.client.address;
+            document.getElementById('assignedTo').value = data.client.project_assigned_to; // Adjusted to use correct date field
+            // document.getElementById('clientProgress').value = data.client.message; 
+            
+          } else {
+            alert('Client not found.');
+            window.location.href = 'registered-clients.html'; // Redirect if not found
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching client data:', error);
+          alert('Error fetching client data.');
+        });
     });
-
   </script>
 
 

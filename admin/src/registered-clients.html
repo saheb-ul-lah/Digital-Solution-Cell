@@ -495,15 +495,33 @@
             </nav>
           </div>
 
+          <!-- Filter Section -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="card-title">List of Registered Clients</h4>
+            <select id="teamFilter" class="form-select" style="width: 200px;">
+              <option value="">All Teams</option>
+              <!-- Static Team Options (Team 1 to Team 10) -->
+              <option value="Team 1">Team 1</option>
+              <option value="Team 2">Team 2</option>
+              <option value="Team 3">Team 3</option>
+              <option value="Team 4">Team 4</option>
+              <option value="Team 5">Team 5</option>
+              <option value="Team 6">Team 6</option>
+              <option value="Team 7">Team 7</option>
+              <option value="Team 8">Team 8</option>
+              <option value="Team 9">Team 9</option>
+              <option value="Team 10">Team 10</option>
+            </select>
+
+          </div>
+
           <!-- Clients List -->
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">List of Registered Clients</h4>
                   <div class="row" id="clientsList">
-                    <!-- Client Card Example -->
-                    <!-- Dynamic cards will be injected here by JavaScript -->
+                    <!-- Dynamic client cards will be injected here by JavaScript -->
                   </div>
                 </div>
               </div>
@@ -531,6 +549,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -540,11 +559,33 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetchClients(); // Fetch clients when the DOM is loaded
+      const teamFilter = document.getElementById('teamFilter');
+
+      // Add "All Projects" option first
+      const allTeamsOption = document.createElement('option');
+      allTeamsOption.value = '';
+      allTeamsOption.text = 'All Projects';
+      teamFilter.appendChild(allTeamsOption);
+
+      // Generate options dynamically for Project 1 to Project 10 (or customize based on your projects)
+      for (let i = 1; i <= 10; i++) {
+        const option = document.createElement('option');
+        option.value = `Project ${i}`;
+        option.text = `Project ${i}`;
+        teamFilter.appendChild(option);
+      }
+
+      // Listen for filter change
+      teamFilter.addEventListener('change', function () {
+        const selectedProject = teamFilter.value; // Get the selected project
+        fetchClients(selectedProject); // Fetch clients based on the selected project
+      });
+
+      fetchClients(); // Fetch all clients when the page is loaded
     });
 
     // Fetch clients from the database
-    function fetchClients() {
+    function fetchClients(project = '') { // Optional project parameter to filter
       fetch('fetch_accepted_clients.php')
         .then(response => {
           if (!response.ok) {
@@ -553,9 +594,10 @@
           return response.json(); // Parse JSON response
         })
         .then(data => {
-          // Check if the fetching was successful
           if (data.success) {
-            renderClients(data.clients); // Render clients to the DOM
+            // Filter clients based on the selected project if provided
+            const filteredClients = project ? data.clients.filter(client => client.project_assigned_to === project) : data.clients;
+            renderClients(filteredClients); // Render filtered clients to the DOM
           } else {
             console.error('Error fetching clients:', data.message);
           }
@@ -568,25 +610,35 @@
     // Render clients to the DOM
     function renderClients(clients) {
       const clientsList = document.getElementById('clientsList');
-      clientsList.innerHTML = ''; // Clear existing clients
+      clientsList.innerHTML = ''; // Clear the existing list
+
+      if (clients.length === 0) {
+        clientsList.innerHTML = '<p>No clients found for the selected project.</p>';
+        return;
+      }
 
       clients.forEach(client => {
         const clientCard = document.createElement('div');
         clientCard.className = 'col-md-4 client-card';
+
+        // Check if the project_assigned_to (team number) is null, and set a red border if true
+        const borderColor = client.project_assigned_to ? '' : 'border: 2px solid red;';
+
         clientCard.innerHTML = `
-            <div class="card client-card-container" data-id="${client.id}">
-                <div class="card-body">
-                    <h5 class="card-title">${client.name}</h5>
-                    <p class="card-text">Email: ${client.email}</p>
-                    <p class="card-text">Phone: ${client.phone}</p>
-                    <div class="client-actions">
-                        <button class="btn btn-gradient-primary btn-sm" onclick="viewClient('${client.id}')">View</button>
-                        <button class="btn btn-gradient-warning btn-sm" onclick="editClient('${client.id}')">Edit</button>
-                        <button class="btn btn-gradient-danger btn-sm" onclick="confirmDelete('${client.id}')">Delete</button>
-                    </div>
-                </div>
-            </div>
-        `;
+      <div class="card client-card-container" data-id="${client.id}" style="${borderColor}">
+        <div class="card-body">
+          <h5 class="card-title">${client.name}</h5>
+          <p class="card-text">Email:<br> ${client.email}</p>
+          <p class="card-text">Assigned to: ${client.project_assigned_to || 'Not assigned'}</p>
+          <p class="card-text">Phone: ${client.phone}</p>
+          <div class="client-actions">
+            <button class="btn btn-gradient-primary btn-sm" onclick="viewClient('${client.id}')">View</button>
+            <button class="btn btn-gradient-warning btn-sm" onclick="editClient('${client.id}')">Edit</button>
+            <button class="btn btn-gradient-danger btn-sm" onclick="confirmDelete('${client.id}')">Delete</button>
+          </div>
+        </div>
+      </div>
+    `;
         clientsList.appendChild(clientCard); // Add the client card to the list
       });
     }
@@ -619,7 +671,7 @@
     // Delete client function (fetches the PHP script)
     function deleteClient(id) {
       // Make an AJAX request to delete the client from the database
-      fetch('fetch_accepted_clients.php', {
+      fetch('delete_client.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

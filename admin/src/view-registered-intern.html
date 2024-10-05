@@ -490,36 +490,53 @@
           <!-- Intern Details -->
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title" id="internName">John Doe</h4>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <p><strong>Email:</strong> <span id="internEmail">johndoe@example.com</span></p>
-                      <p><strong>Phone:</strong> <span id="internPhone">+1234567890</span></p>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" id="internName">Loading...</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- <p><strong>First Name:</strong> <span id="internFirstName">Loading...</span></p>
+                                <p><strong>Last Name:</strong> <span id="internLastName">Loading...</span></p> -->
+                                <br>
+                                <p><strong>Email:</strong> <span id="internEmail">Loading...</span></p>
+                                <p><strong>Phone:</strong> <span id="internPhone">Loading...</span></p>
+                                <p><strong>College Name:</strong> <span id="internCollegeName">Loading...</span></p>
+                                <p><strong>Year of Study:</strong> <span id="internYearOfStudy">Loading...</span></p>
+                                <p><strong>Recommender Name:</strong> <span id="internRecommenderName">Loading...</span></p>
+                                <p><strong>Recommender Designation:</strong> <span id="internRecommenderDesignation">Loading...</span></p>
+                                <p><strong>Date of Birth:</strong> <span id="internDateOfBirth">Loading...</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Team Number:</strong> <span id="internTeamNo">Loading...</span></p>
+                                <p><strong>Internship Role:</strong> <span id="internshipRole">Loading...</span></p>
+                                <p><strong>Internship Duration:</strong> <span id="internshipDuration">Loading...</span></p>
+                                <p><strong>Address:</strong> <span id="internAddress">Loading...</span></p>
+                                <p><strong>PIN Code:</strong> <span id="internZipCode">Loading...</span></p>
+                                <p><strong>City:</strong> <span id="internCity">Loading...</span></p>
+                                <p><strong>State:</strong> <span id="internState">Loading...</span></p>
+                                <p><strong>Country:</strong> <span id="internCountry">Loading...</span></p>
+                                <p><strong>Letter of Recommendation Path:</strong> <span id="internLetterOfRecommendation">Loading...</span></p>
+                                <p><strong>Joined on:</strong> <span id="internJoinDate">Loading...</span></p>
+                            </div>
+                        </div>
+        
+                        <!-- Additional Information -->
+                        <!-- <div class="row mt-4">
+                            <div class="col-md-12">
+                                <h5>Internship Progress</h5>
+                                <p id="internProgress">1 months left...</p>
+                            </div>
+                        </div> -->
+        
+                        <!-- Back to List Button -->
+                        <div class="mt-4">
+                            <a href="registered-interns.html" class="btn btn-gradient-primary">Back to List</a>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                      <p><strong>Address:</strong> <span id="internAddress">123 Main Street, City</span></p>
-                      <p><strong>Joined on:</strong> <span id="internJoinDate">January 1, 2024</span></p>
-                    </div>
-                  </div>
-
-                  <!-- Additional Information -->
-                  <div class="row mt-4">
-                    <div class="col-md-12">
-                      <h5>Internship Progress</h5>
-                      <p id="internProgress">Working on project XYZ, completed 75%.</p>
-                    </div>
-                  </div>
-
-                  <!-- Back to List Button -->
-                  <div class="mt-4">
-                    <a href="registered-interns.html" class="btn btn-gradient-primary">Back to List</a>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
+        
         </div>
       </div>
     </div>
@@ -532,36 +549,51 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Get internId from the URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const internId = urlParams.get('internId');
+        // Get internId from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const internId = urlParams.get('internId');
 
-      // Mock data for interns (replace with actual API calls)
-      const interns = [
-        { id: '1', name: 'John Doe', email: 'johndoe@example.com', phone: '+1234567890', address: '123 Main Street, City', joinDate: 'January 1, 2024', progress: 'Working on project XYZ, completed 75%.' },
-        { id: '2', name: 'Jane Smith', email: 'janesmith@example.com', phone: '+1234567891', address: '456 Oak Street, Town', joinDate: 'February 10, 2024', progress: 'Completed training, awaiting project assignment.' },
-        { id: '3', name: 'Alice Johnson', email: 'alicej@example.com', phone: '+1234567892', address: '789 Pine Avenue, Village', joinDate: 'March 15, 2024', progress: 'Researching data for project ABC, completed 40%.' }
-      ];
-
-      // Find the intern details by id
-      const intern = interns.find(intern => intern.id === internId);
-
-      if (intern) {
-        // Display intern details in the DOM
-        document.getElementById('internName').textContent = intern.name;
-        document.getElementById('internEmail').textContent = intern.email;
-        document.getElementById('internPhone').textContent = intern.phone;
-        document.getElementById('internAddress').textContent = intern.address;
-        document.getElementById('internJoinDate').textContent = intern.joinDate;
-        document.getElementById('internProgress').textContent = intern.progress;
-      } else {
-        alert('Intern not found.');
-        window.location.href = 'registered-interns.html'; // Redirect if not found
-      }
+        // Fetch intern details using AJAX
+        fetch(`fetch_accepted_interns.php?internId=${internId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const intern = data.intern;
+                    // Display intern details in the DOM
+                    document.getElementById('internName').textContent = intern.first_name+" "+intern.last_name;
+                    // document.getElementById('internFirstName').textContent = intern.first_name;
+                    // document.getElementById('internLastName').textContent = intern.last_name;
+                    document.getElementById('internEmail').textContent = intern.email_address; // Make sure the field names match your database
+                    document.getElementById('internPhone').textContent = intern.phone_number; // Adjust if necessary
+                    document.getElementById('internCollegeName').textContent = intern.college_name;
+                    document.getElementById('internYearOfStudy').textContent = intern.year_of_study;
+                    document.getElementById('internRecommenderName').textContent = intern.recommender_name;
+                    document.getElementById('internRecommenderDesignation').textContent = intern.recommender_designation;
+                    document.getElementById('internDateOfBirth').textContent = intern.date_of_birth;
+                    document.getElementById('internTeamNo').textContent = intern.team_no; // Adjust if necessary
+                    document.getElementById('internshipRole').textContent = intern.internship_role;
+                    document.getElementById('internshipDuration').textContent = intern.internship_duration;
+                    document.getElementById('internAddress').textContent = intern.address;
+                    document.getElementById('internZipCode').textContent = intern.zip_code;
+                    document.getElementById('internCity').textContent = intern.city;
+                    document.getElementById('internState').textContent = intern.state;
+                    document.getElementById('internCountry').textContent = intern.country;
+                    document.getElementById('internLetterOfRecommendation').textContent = intern.letter_of_recommendation_path;
+                    document.getElementById('internJoinDate').textContent = intern.application_date; // Assuming this is the join date
+                    // document.getElementById('internProgress').textContent = intern.progress || "Loading..."; // Assuming there's a progress field
+                } else {
+                    alert(data.message || 'Intern not found.');
+                    window.location.href = 'registered-interns.html'; // Redirect if not found
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching intern data:', error);
+                alert('An error occurred while fetching intern details.');
+                window.location.href = 'registered-interns.html'; // Redirect on error
+            });
     });
+</script>
 
-
-  </script>
 
 
 
