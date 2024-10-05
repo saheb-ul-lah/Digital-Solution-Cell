@@ -511,7 +511,9 @@
               <option value="Team 8">Team 8</option>
               <option value="Team 9">Team 9</option>
               <option value="Team 10">Team 10</option>
+              <option value="unassigned">Unassigned</option> <!-- Added unassigned option -->
             </select>
+
 
           </div>
 
@@ -570,8 +572,8 @@
       // Generate options dynamically for Project 1 to Project 10 (or customize based on your projects)
       for (let i = 1; i <= 10; i++) {
         const option = document.createElement('option');
-        option.value = `Project ${i}`;
-        option.text = `Project ${i}`;
+        // option.value = `Project ${i}`;
+        // option.text = `Project ${i}`;
         teamFilter.appendChild(option);
       }
 
@@ -595,8 +597,17 @@
         })
         .then(data => {
           if (data.success) {
-            // Filter clients based on the selected project if provided
-            const filteredClients = project ? data.clients.filter(client => client.project_assigned_to === project) : data.clients;
+            let filteredClients;
+
+            // Filter clients based on the selected project
+            if (project === 'unassigned') {
+              filteredClients = data.clients.filter(client => !client.project_assigned_to); // Unassigned clients
+            } else if (project) {
+              filteredClients = data.clients.filter(client => client.project_assigned_to === project); // Specific project
+            } else {
+              filteredClients = data.clients; // Show all clients
+            }
+
             renderClients(filteredClients); // Render filtered clients to the DOM
           } else {
             console.error('Error fetching clients:', data.message);
@@ -625,20 +636,21 @@
         const borderColor = client.project_assigned_to ? '' : 'border: 2px solid red;';
 
         clientCard.innerHTML = `
-      <div class="card client-card-container" data-id="${client.id}" style="${borderColor}">
+      <div class="card client-card-container" data-id="${client.id}" style="${borderColor}" onclick="viewClient('${client.id}')">
         <div class="card-body">
           <h5 class="card-title">${client.name}</h5>
           <p class="card-text">Email:<br> ${client.email}</p>
           <p class="card-text">Assigned to: ${client.project_assigned_to || 'Not assigned'}</p>
           <p class="card-text">Phone: ${client.phone}</p>
           <div class="client-actions">
-            <button class="btn btn-gradient-primary btn-sm" onclick="viewClient('${client.id}')">View</button>
-            <button class="btn btn-gradient-warning btn-sm" onclick="editClient('${client.id}')">Edit</button>
-            <button class="btn btn-gradient-danger btn-sm" onclick="confirmDelete('${client.id}')">Delete</button>
+            <button class="btn btn-gradient-primary btn-sm" onclick="event.stopPropagation(); viewClient('${client.id}')">View</button>
+            <button class="btn btn-gradient-warning btn-sm" onclick="event.stopPropagation(); editClient('${client.id}')">Edit</button>
+            <button class="btn btn-gradient-danger btn-sm" onclick="event.stopPropagation(); confirmDelete('${client.id}')">Delete</button>
           </div>
         </div>
       </div>
     `;
+
         clientsList.appendChild(clientCard); // Add the client card to the list
       });
     }

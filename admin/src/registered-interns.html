@@ -352,18 +352,6 @@
             </div>
           </li> -->
 
-
-
-
-
-
-
-
-
-
-
-
-
           <!-- <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">Basic UI Elements</span>
@@ -501,7 +489,7 @@
             <select id="teamFilter" class="form-select" style="width: 200px;">
               <option value="">All Teams</option>
               <!-- Dynamically generated team options -->
-              <option value="NULL">Not assigned</option>
+              <option value="0">Not assigned</option>
               <option value="1">Team 1</option>
               <option value="2">Team 2</option>
               <option value="3">Team 3</option>
@@ -559,124 +547,137 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const internsList = document.getElementById('internsList');
-        const teamFilter = document.getElementById('teamFilter');
+      const internsList = document.getElementById('internsList');
+      const teamFilter = document.getElementById('teamFilter');
 
-        // Function to fetch all accepted interns
-        function fetchAcceptedInterns(selectedTeam = '') {
-            fetch('fetch_accepted_interns.php', {
-                method: 'GET',
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const interns = data.interns;
+      // Function to fetch all accepted interns
+      function fetchAcceptedInterns(selectedTeam = '') {
+        fetch('fetch_accepted_interns.php', {
+          method: 'GET',
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              const interns = data.interns;
 
-                        // Clear existing list
-                        internsList.innerHTML = '';
+              // Clear existing list
+              internsList.innerHTML = '';
 
-                        // Filter interns based on selected team number
-                        const filteredInterns = interns.filter(intern => {
-                            return selectedTeam === '' || (intern.team_no && intern.team_no.toString() === selectedTeam);
-                        });
+              // Filter interns based on selected team number
+              const filteredInterns = interns.filter(intern => {
+                // If the selected team is '0', show only unassigned interns (team_no is null or undefined or empty)
+                if (selectedTeam === '0') {
+                  return !intern.team_no; // Checks for null, undefined, or empty team_no
+                }
 
-                        // Render each accepted intern to the DOM
-                        filteredInterns.forEach(intern => {
-                            const internCard = document.createElement('div');
-                            internCard.className = 'col-md-4 intern-card';
-                            internCard.innerHTML = `
-                                <div class="card intern-card-container" data-id="${intern.id}" style="${!intern.team_no ? 'border: 2px solid red;' : ''}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${intern.first_name} ${intern.last_name}</h5>
-                                        <p class="card-text">Team no: ${intern.team_no ? intern.team_no : 'Not assigned'}</p>
-                                        <p class="card-text">Email:<br> ${intern.email_address}</p>
-                                        <p class="card-text">Phone: ${intern.phone_number}</p>
-                                        <div class="intern-actions">
-                                            <button class="btn btn-gradient-primary btn-sm" onclick="viewIntern('${intern.id}')">View</button>
-                                            <button class="btn btn-gradient-warning btn-sm" onclick="editIntern('${intern.id}')">Edit</button>
-                                            <button class="btn btn-gradient-danger btn-sm" onclick="confirmDelete('${intern.id}')">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                            internsList.appendChild(internCard);
-                        });
+                // Otherwise, filter based on the team_no or show all if no specific team is selected
+                return selectedTeam === '' || (intern.team_no && intern.team_no.toString() === selectedTeam);
+              });
 
-                        // Handle case when no interns match the filter
-                        if (filteredInterns.length === 0) {
-                            internsList.innerHTML = `<div class="col-12"><p>No interns found for the selected team.</p></div>`;
-                        }
-                    } else {
-                        console.error('Failed to fetch interns: ', data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching intern data:', error);
+              // Render each accepted intern to the DOM
+              filteredInterns.forEach(intern => {
+                const internCard = document.createElement('div');
+                internCard.className = 'col-md-4 intern-card';
+                internCard.innerHTML = `
+              <div class="card intern-card-container" data-id="${intern.id}" style="${!intern.team_no ? 'border: 2px solid red;' : ''}">
+                <div class="card-body">
+                  <h5 class="card-title">${intern.first_name} ${intern.last_name}</h5>
+                  <p class="card-text">Team no: ${intern.team_no ? intern.team_no : 'Not assigned'}</p>
+                  <p class="card-text">Email:<br> ${intern.email_address}</p>
+                  <p class="card-text">Phone: ${intern.phone_number}</p>
+                  <div class="intern-actions">
+                    <button class="btn btn-gradient-primary btn-sm" onclick="event.stopPropagation(); viewIntern('${intern.id}')">View</button>
+                    <button class="btn btn-gradient-warning btn-sm" onclick="event.stopPropagation(); editIntern('${intern.id}')">Edit</button>
+                    <button class="btn btn-gradient-danger btn-sm" onclick="event.stopPropagation(); confirmDelete('${intern.id}')">Delete</button>
+                  </div>
+                </div>
+              </div>
+            `;
+
+                // Attach click event to the card container for viewing
+                internCard.querySelector('.intern-card-container').addEventListener('click', function () {
+                  viewIntern(intern.id);
                 });
-        }
 
-        // Call fetchAcceptedInterns to load the data when the page loads
-        fetchAcceptedInterns();
+                internsList.appendChild(internCard);
+              });
 
-        // Filter functionality
-        teamFilter.addEventListener('change', function () {
-            const selectedTeam = this.value;
-            fetchAcceptedInterns(selectedTeam); // Pass selected team to fetch function
-        });
+              // Handle case when no interns match the filter
+              if (filteredInterns.length === 0) {
+                internsList.innerHTML = `<div class="col-12"><p>No interns found for the selected team.</p></div>`;
+              }
+            } else {
+              console.error('Failed to fetch interns: ', data.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching intern data:', error);
+          });
+      }
 
-        // View intern function
-        window.viewIntern = function (id) {
-            window.location.href = `view-registered-intern.html?internId=${id}`;
+      // Call fetchAcceptedInterns to load the data when the page loads
+      fetchAcceptedInterns();
+
+      // Filter functionality
+      teamFilter.addEventListener('change', function () {
+        const selectedTeam = this.value;
+        fetchAcceptedInterns(selectedTeam); // Pass selected team to fetch function
+      });
+
+      // View intern function
+      window.viewIntern = function (id) {
+        window.location.href = `view-registered-intern.html?internId=${id}`;
+      };
+
+      // Edit intern function
+      window.editIntern = function (id) {
+        window.location.href = `edit-registered-intern.html?internId=${id}`;
+      };
+
+      // Delete intern confirmation
+      window.confirmDelete = function (id) {
+        const deleteButton = document.getElementById('confirmDeleteButton');
+
+        // Show delete confirmation modal
+        const modal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
+        modal.show();
+
+        // Confirm delete action
+        deleteButton.onclick = function () {
+          deleteIntern(id);
+          modal.hide();
         };
+      };
 
-        // Edit intern function
-        window.editIntern = function (id) {
-            window.location.href = `edit-registered-intern.html?internId=${id}`;
-        };
-
-        // Delete intern confirmation
-        window.confirmDelete = function (id) {
-            const deleteButton = document.getElementById('confirmDeleteButton');
-
-            // Show delete confirmation modal
-            const modal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
-            modal.show();
-
-            // Confirm delete action
-            deleteButton.onclick = function () {
-                deleteIntern(id);
-                modal.hide();
-            };
-        };
-
-        // Delete intern function (backend call to delete)
-        function deleteIntern(id) {
-            fetch('fetch_accepted_interns.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ id: id }),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Remove the deleted intern card from the DOM
-                        const internCard = document.querySelector(`.intern-card-container[data-id='${id}']`);
-                        if (internCard) {
-                            internCard.remove();
-                        }
-                        console.log(`Intern with ID ${id} has been deleted.`);
-                    } else {
-                        console.error('Failed to delete intern: ', data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error deleting intern:', error);
-                });
-        }
+      // Delete intern function (backend call to delete)
+      function deleteIntern(id) {
+        fetch('fetch_accepted_interns.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: id }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Remove the deleted intern card from the DOM
+              const internCard = document.querySelector(`.intern-card-container[data-id='${id}']`);
+              if (internCard) {
+                internCard.remove();
+              }
+              console.log(`Intern with ID ${id} has been deleted.`);
+            } else {
+              console.error('Failed to delete intern: ', data.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error deleting intern:', error);
+          });
+      }
     });
-</script>
+
+  </script>
 
 
 
