@@ -624,7 +624,9 @@
               assignedToSelect.appendChild(unassignedOption);
 
               // Add the team options dynamically
+              let totalTeams=1;
               data.teams.forEach(teamNo => {
+                totalTeams++;
                 const option = document.createElement('option');
                 option.value = `Team ${teamNo}`;
                 option.textContent = `Team ${teamNo}`;
@@ -633,6 +635,14 @@
                 }
                 assignedToSelect.appendChild(option);
               });
+              // 
+              const option = document.createElement('option');
+              option.value = `Team ${totalTeams}`;
+              option.textContent = `Team ${totalTeams} (Empty)`;
+              if (option.value === assignedTeam) {
+                option.selected = true; // Select the assigned team
+              }
+              assignedToSelect.appendChild(option);
             } else {
               console.error('No team numbers found.');
             }
